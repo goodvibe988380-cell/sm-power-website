@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 210 16% 10%;
+    --card: 210 20% 100%;
+    --card-foreground: 210 16% 10%;
+    --popover: 210 20% 100%;
+    --popover-foreground: 210 16% 10%;
+    --primary: 214 100% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 20% 88%;
+    --secondary-foreground: 215 20% 12%;
+    --muted: 215 20% 94%;
+    --muted-foreground: 215 15% 40%;
+    --accent: 45 100% 50%;
+    --accent-foreground: 210 16% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 215 20% 90%;
+    --input: 215 20% 96%;
+    --ring: 214 100% 42%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-[#F8FAFC] text-[#0F172A] antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .font-mono {
+    font-family: 'Space Mono', monospace;
+  }
+}
+
+@layer components {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#FFD700] to-[#FFA500];
+  }
+  
+  .glow-gold {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.18);
+  }
+  
+  .glow-gold-strong {
+    box-shadow: 0 0 60px rgba(255, 215, 0, 0.3);
+  }
+  
+  .glass-panel {
+    @apply bg-[#0B0B0B]/80 backdrop-blur-md border border-white/10;
+  }
+  
+  .gold-line {
+    @apply h-[2px] bg-[#FFD700];
+  }
+  
+  .section-pinned {
+    @apply w-screen h-screen relative overflow-hidden;
+  }
+  
+  .grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E2E8F0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #64748B;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0F172A;
+}
+
+/* Selection */
+::selection {
+  background: rgba(59, 130, 246, 0.2);
+  color: #0F172A;
+}
