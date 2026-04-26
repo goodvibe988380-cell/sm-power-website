@@ -8,6 +8,7 @@ const projects = [
     progress: 84,
     location: 'Shimoga',
     image: '/project_1.jpg',
+    type: 'commercial',
   },
   {
     title: 'Commercial Solar Array',
@@ -16,6 +17,7 @@ const projects = [
     progress: 62,
     location: 'Karnataka',
     image: '/project_2.jpg',
+    type: 'commercial',
   },
   {
     title: 'Industrial ELV Upgrade',
@@ -24,6 +26,7 @@ const projects = [
     progress: 91,
     location: 'Industrial Zone',
     image: '/project_3.jpg',
+    type: 'commercial',
   },
   {
     title: 'Lighting Retrofit',
@@ -32,6 +35,7 @@ const projects = [
     progress: 100,
     location: 'Commercial Complex',
     image: '/electrical_services.jpg',
+    type: 'commercial',
   },
   {
     title: 'Design Consultation',
@@ -40,6 +44,7 @@ const projects = [
     progress: 38,
     location: 'Customer Office',
     image: '/design_consultation.jpg',
+    type: 'commercial',
   },
   {
     title: 'CCTV Network',
@@ -48,10 +53,57 @@ const projects = [
     progress: 76,
     location: 'Retail Site',
     image: '/elv_services.jpg',
+    type: 'commercial',
+  },
+  // Residential Projects
+  {
+    title: 'Luxury Villa Lighting',
+    category: 'Completed',
+    status: 'Delivered',
+    progress: 100,
+    location: 'Whitefield, Bangalore',
+    image: '/residential_villa.svg',
+    type: 'residential',
+  },
+  {
+    title: 'Apartment Complex ELV',
+    category: 'Ongoing',
+    status: 'Installation stage',
+    progress: 55,
+    location: 'Koramangala, Bangalore',
+    image: '/apartment_elv.svg',
+    type: 'residential',
+  },
+  {
+    title: 'Home Interior Lighting',
+    category: 'Live',
+    status: 'In progress',
+    progress: 72,
+    location: 'MG Road, Bangalore',
+    image: '/home_interior.svg',
+    type: 'residential',
+  },
+  {
+    title: 'Bungalow Electrical Setup',
+    category: 'Completed',
+    status: 'Delivered',
+    progress: 100,
+    location: 'Jayanagar, Bangalore',
+    image: '/bungalow_electrical.svg',
+    type: 'residential',
+  },
+  {
+    title: 'Penthouse Smart Lighting',
+    category: 'Ongoing',
+    status: 'Wiring phase',
+    progress: 45,
+    location: 'Indiranagar, Bangalore',
+    image: '/penthouse_lighting.svg',
+    type: 'residential',
   },
 ] as const
 
-type FilterKey = 'All' | 'Live' | 'Ongoing' | 'Completed'
+type FilterKey = 'All' | 'Live' | 'Ongoing' | 'Completed' | 'Residential'
 
 export default function Projects() {
   const [filter, setFilter] = useState<FilterKey>('All')
@@ -68,7 +120,12 @@ export default function Projects() {
   }, [])
 
   const visibleProjects = useMemo(
-    () => projects.filter((project) => filter === 'All' || project.category === filter),
+    () => {
+      if (filter === 'Residential') {
+        return projects.filter((project) => project.type === 'residential')
+      }
+      return projects.filter((project) => filter === 'All' || project.category === filter)
+    },
     [filter]
   )
 
@@ -91,7 +148,7 @@ export default function Projects() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          {(['All', 'Live', 'Ongoing', 'Completed'] as FilterKey[]).map((item) => (
+          {(['All', 'Live', 'Ongoing', 'Completed', 'Residential'] as FilterKey[]).map((item) => (
             <button
               key={item}
               onClick={() => {

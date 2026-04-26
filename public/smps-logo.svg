@@ -1,0 +1,10 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="112" fill="#080808"/>
+  <circle cx="256" cy="220" r="142" stroke="#D4AF37" stroke-width="22"/>
+  <path d="M178 232C178 188.922 212.922 154 256 154C299.078 154 334 188.922 334 232C334 261.684 317.408 287.5 293 300.68V330H219V300.68C194.592 287.5 178 261.684 178 232Z" stroke="#F5D875" stroke-width="18" stroke-linejoin="round"/>
+  <path d="M220 360H292" stroke="#D4AF37" stroke-width="18" stroke-linecap="round"/>
+  <path d="M232 394H280" stroke="#D4AF37" stroke-width="18" stroke-linecap="round"/>
+  <path d="M202 246L238 205L272 246L310 205" stroke="white" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M154 112L112 154M400 154L358 112M256 74V36" stroke="#D4AF37" stroke-width="16" stroke-linecap="round"/>
+  <text x="256" y="472" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="54" font-weight="800" letter-spacing="8" fill="#D4AF37">SMPS</text>
+</svg>

@@ -5,18 +5,22 @@ import {
   CheckCircle2,
   ClipboardList,
   Images,
+  Landmark,
   Mail,
   MapPin,
   Menu,
   Phone,
   PlugZap,
-  Zap,
+  ShieldCheck,
+  Sparkles,
+  Sun,
 } from 'lucide-react';
 import WhatsAppButton from './sections/WhatsAppButton';
 import './App.css';
 
 const navLinks = [
   { label: 'About', href: '#about' },
+  { label: 'Why SMPS', href: '#why-smps' },
   { label: 'Services', href: '#services' },
   { label: 'Gallery', href: '#projects' },
   { label: 'Contact', href: '#contact' },
@@ -73,6 +77,62 @@ const detailedServices = [
     title: 'ESCOM Office Works',
     items: ['Temporary power sanction', 'Permanent power sanction', 'Load enhancement / reduction', 'HT power sanction', 'Name changing', 'Meter replacement'],
   },
+];
+
+const trustStats = [
+  { value: '4', label: 'Core service verticals' },
+  { value: '360', label: 'Design to handover support' },
+  { value: '24/7', label: 'WhatsApp enquiry access' },
+];
+
+const processSteps = [
+  {
+    title: 'Site Visit & Requirement Study',
+    text: 'We understand the site, load needs, electrical scope, safety requirements and approval path before execution begins.',
+  },
+  {
+    title: 'Design, Estimate & Documentation',
+    text: 'SLD, panel planning, switch box schedule, load calculation and material planning are prepared with clarity.',
+  },
+  {
+    title: 'Installation & Coordination',
+    text: 'Wiring, panel termination, ELV, lighting, earthing, automation and site work are coordinated cleanly.',
+  },
+  {
+    title: 'Testing, Handover & AMC',
+    text: 'Final checks, customer handover and maintenance support help keep the installation dependable after completion.',
+  },
+];
+
+const whyChoose = [
+  {
+    icon: ShieldCheck,
+    title: 'Safety-first execution',
+    text: 'Practical electrical work with attention to protection, neatness and long-term reliability.',
+  },
+  {
+    icon: Landmark,
+    title: 'Approval guidance',
+    text: 'Support for power sanction, load enhancement, HT sanction, meter replacement and name change work.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Premium finish',
+    text: 'Lighting, automation and panel work delivered with a clean finish suitable for modern interiors.',
+  },
+  {
+    icon: Sun,
+    title: 'Future-ready systems',
+    text: 'Solar, EV charging, ELV, access points and automation options planned for evolving needs.',
+  },
+];
+
+const industries = ['Homes', 'Apartments', 'Offices', 'Retail Spaces', 'Commercial Buildings', 'Industrial Sites'];
+
+const businessDetails = [
+  ['Proprietor', 'Prithviraj S P'],
+  ['Service Area', 'Shivamogga and nearby Karnataka regions'],
+  ['Website', 'smpowersolutions.in'],
 ];
 
 const projectCards = [
@@ -132,9 +192,7 @@ function App() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#080808]/90 backdrop-blur-md">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:h-20 lg:px-8">
           <a href="#" className="flex items-center gap-3" aria-label="SM Power Solutions home">
-            <span className="grid h-10 w-10 place-items-center rounded-full border border-[#D4AF37]/60 bg-[#D4AF37]/10">
-              <Zap className="h-5 w-5 text-[#D4AF37]" />
-            </span>
+            <img src="/smps-logo.svg" alt="" className="h-11 w-11 rounded-2xl shadow-[0_0_24px_rgba(212,175,55,0.18)]" />
             <span className="font-heading text-base font-black tracking-[0.14em] sm:text-lg">
               SM <span className="text-[#D4AF37]">POWER</span> SOLUTIONS
             </span>
@@ -165,12 +223,13 @@ function App() {
 
           <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl items-center gap-10 px-5 py-16 lg:grid-cols-[1fr_0.78fr] lg:px-8">
             <div className="max-w-3xl">
-              <p className="font-mono text-xs uppercase tracking-[0.36em] text-[#D4AF37]">Electrical services and approvals</p>
+              <img src="/smps-logo.svg" alt="SM Power Solutions logo" className="mb-6 h-20 w-20 rounded-3xl shadow-[0_0_38px_rgba(212,175,55,0.28)]" />
+              <p className="font-mono text-xs uppercase tracking-[0.36em] text-[#D4AF37]">Shivamogga electrical and ELV specialists</p>
               <h1 className="mt-5 font-heading text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
-                Powering spaces with precise electrical work.
+                Premium electrical work for modern spaces.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
-                SM Power Solutions delivers design consultation, electrical execution, ELV systems and ESCOM office support with clean planning and dependable site work.
+                SM Power Solutions delivers design consultation, electrical execution, ELV systems and ESCOM office support with clean planning, safe installation and dependable site work.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a href="#services" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#D4AF37] px-7 py-4 font-bold text-[#080808] transition-transform hover:-translate-y-0.5">
@@ -179,6 +238,14 @@ function App() {
                 <a href="tel:+919611951518" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-4 font-semibold text-white transition-colors hover:border-[#D4AF37] hover:text-[#D4AF37]">
                   <Phone className="h-5 w-5" /> Call Now
                 </a>
+              </div>
+              <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
+                {trustStats.map((stat) => (
+                  <div key={stat.label} className="rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-5">
+                    <p className="font-heading text-2xl font-black text-[#D4AF37]">{stat.value}</p>
+                    <p className="mt-1 text-xs leading-5 text-white/56">{stat.label}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -207,7 +274,7 @@ function App() {
                 Practical engineering for homes, offices and commercial projects.
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">
-                The website keeps the premium black and gold identity, but the content is now structured for real users: quick trust, clear service discovery and fast enquiry.
+                From drawings and load calculation to site execution and approval support, SMPS keeps every stage organized so customers get clear communication and reliable workmanship.
               </p>
               <div className="mt-8 grid gap-4 sm:grid-cols-3">
                 {[
@@ -226,17 +293,68 @@ function App() {
           </div>
         </section>
 
+        <section id="why-smps" className="relative overflow-hidden bg-[#0d0d0d] py-20 lg:py-28">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(212,175,55,0.18),transparent_34%),radial-gradient(circle_at_80%_30%,rgba(212,175,55,0.1),transparent_28%)]" />
+          <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
+            <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.36em] text-[#D4AF37]">Why Choose SMPS</p>
+                <h2 className="mt-4 max-w-3xl font-heading text-4xl font-black leading-tight sm:text-5xl">
+                  Rich finish, careful planning and dependable electrical support.
+                </h2>
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-white/66">
+                  Every project is handled with a balance of technical clarity, neat execution and responsive support, from first discussion to final handover.
+                </p>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {whyChoose.map((item) => (
+                  <article key={item.title} className="rounded-2xl border border-white/10 bg-[#080808]/80 p-5 shadow-[0_18px_60px_rgba(0,0,0,0.25)]">
+                    <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
+                      <item.icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="mt-4 font-heading text-lg font-bold">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-white/58">{item.text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-12 grid gap-6 lg:grid-cols-[0.82fr_1.18fr]">
+              <div className="overflow-hidden rounded-2xl border border-[#D4AF37]/20">
+                <img src="/capabilities_analysis.jpg" alt="Electrical planning and analysis" className="h-full min-h-[420px] w-full object-cover" loading="lazy" />
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-6 lg:p-8">
+                <p className="font-mono text-xs uppercase tracking-[0.32em] text-[#D4AF37]">Our Process</p>
+                <div className="mt-7 grid gap-5">
+                  {processSteps.map((step, index) => (
+                    <div key={step.title} className="grid gap-4 rounded-2xl border border-white/10 bg-[#080808]/70 p-5 sm:grid-cols-[auto_1fr]">
+                      <span className="grid h-10 w-10 place-items-center rounded-full bg-[#D4AF37] font-heading font-black text-[#080808]">
+                        {index + 1}
+                      </span>
+                      <div>
+                        <h3 className="font-heading text-lg font-bold text-white">{step.title}</h3>
+                        <p className="mt-2 text-sm leading-6 text-white/58">{step.text}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="services" className="bg-[#111111] py-20 lg:py-28">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-3xl">
                 <p className="font-mono text-xs uppercase tracking-[0.36em] text-[#D4AF37]">Core Services</p>
                 <h2 className="mt-4 font-heading text-4xl font-black leading-tight sm:text-5xl">
-                  Clear service options from your reference, presented professionally.
+                  Complete electrical, ELV and approval support.
                 </h2>
               </div>
               <p className="max-w-md text-sm leading-7 text-white/56">
-                No pasted reference screenshots. Only clean, readable service content for customers.
+                A single point of support for planning, installation, low-voltage systems, lighting, automation, maintenance and power sanction work.
               </p>
             </div>
 
@@ -266,6 +384,22 @@ function App() {
                   </ul>
                 </article>
               ))}
+            </div>
+
+            <div className="mt-12 rounded-2xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] p-6">
+              <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-[0.32em] text-[#D4AF37]">Industries Served</p>
+                  <h3 className="mt-3 font-heading text-2xl font-bold text-white">Built for residential, commercial and industrial electrical needs.</h3>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  {industries.map((industry) => (
+                    <span key={industry} className="rounded-full border border-white/10 bg-[#080808]/70 px-4 py-2 text-sm text-white/72">
+                      {industry}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -352,6 +486,13 @@ function App() {
               </p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur-sm">
+              <div className="mb-6 flex items-center gap-4 border-b border-white/10 pb-6">
+                <img src="/smps-logo.svg" alt="" className="h-14 w-14 rounded-2xl" />
+                <div>
+                  <p className="font-heading text-xl font-black">SM Power Solutions</p>
+                  <p className="mt-1 text-sm text-white/56">Electrical services, ELV and ESCOM works</p>
+                </div>
+              </div>
               <div className="grid gap-4">
                 <a href="tel:+919611951518" className="flex items-center gap-4 rounded-xl border border-white/10 bg-[#080808]/60 p-4 transition-colors hover:border-[#D4AF37]/45">
                   <Phone className="h-5 w-5 text-[#D4AF37]" />
@@ -366,6 +507,14 @@ function App() {
                   <span className="font-semibold">Shivamogga, Karnataka</span>
                 </div>
               </div>
+              <dl className="mt-5 grid gap-3 rounded-xl border border-white/10 bg-[#080808]/50 p-4">
+                {businessDetails.map(([label, value]) => (
+                  <div key={label} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                    <dt className="text-xs uppercase tracking-[0.22em] text-white/42">{label}</dt>
+                    <dd className="text-sm font-semibold text-white/78 sm:text-right">{value}</dd>
+                  </div>
+                ))}
+              </dl>
               <a href="https://wa.me/919611951518" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#D4AF37] px-7 py-4 font-bold text-[#080808] transition-transform hover:-translate-y-0.5">
                 WhatsApp Enquiry <ArrowRight className="h-5 w-5" />
               </a>
@@ -374,8 +523,16 @@ function App() {
         </section>
       </main>
 
-      <footer className="border-t border-white/10 bg-[#080808] px-5 py-8 text-center text-sm text-white/52">
-        SM Power Solutions. Electrical Services, ELV and ESCOM Office Works.
+      <footer className="border-t border-white/10 bg-[#080808] px-5 py-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 text-center text-sm text-white/52 sm:flex-row sm:text-left">
+          <div className="flex items-center gap-3">
+            <img src="/smps-logo.svg" alt="" className="h-10 w-10 rounded-xl" />
+            <span>SM Power Solutions. Electrical Services, ELV and ESCOM Office Works.</span>
+          </div>
+          <a href="mailto:prithviraj.smps@gmail.com" className="transition-colors hover:text-[#D4AF37]">
+            prithviraj.smps@gmail.com
+          </a>
+        </div>
       </footer>
 
       <WhatsAppButton />

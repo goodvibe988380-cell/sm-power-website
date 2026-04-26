@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect fill="#1e1e1e" width="800" height="600"/>
+  <rect fill="#2a2a2a" x="150" y="100" width="500" height="400"/>
+  <circle fill="#D4AF37" cx="250" cy="200" r="30"/>
+  <circle fill="#D4AF37" cx="400" cy="180" r="40"/>
+  <circle fill="#D4AF37" cx="550" cy="200" r="30"/>
+  <rect fill="#D4AF37" x="200" y="300" width="400" height="150"/>
+  <rect fill="#D4AF37" x="220" y="320" width="80" height="110"/>
+  <rect fill="#D4AF37" x="360" y="320" width="80" height="110"/>
+  <rect fill="#D4AF37" x="500" y="320" width="80" height="110"/>
+  <text fill="#D4AF37" font-family="Arial" font-size="24" x="400" y="550" text-anchor="middle">Home Interior Lighting</text>
+</svg>

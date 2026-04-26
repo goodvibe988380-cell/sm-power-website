@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect fill="#1a1a1a" width="800" height="600"/>
+  <rect fill="#252525" x="100" y="50" width="600" height="500"/>
+  <rect fill="#D4AF37" x="150" y="100" width="200" height="150"/>
+  <rect fill="#D4AF37" x="450" y="100" width="200" height="150"/>
+  <rect fill="#D4AF37" x="150" y="300" width="200" height="200"/>
+  <rect fill="#D4AF37" x="450" y="300" width="200" height="200"/>
+  <circle fill="#D4AF37" cx="250" cy="150" r="20"/>
+  <circle fill="#D4AF37" cx="550" cy="150" r="20"/>
+  <circle fill="#D4AF37" cx="250" cy="350" r="25"/>
+  <circle fill="#D4AF37" cx="550" cy="350" r="25"/>
+  <text fill="#D4AF37" font-family="Arial" font-size="24" x="400" y="580" text-anchor="middle">Penthouse Smart Lighting</text>
+</svg>
