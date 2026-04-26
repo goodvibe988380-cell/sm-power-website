@@ -16,12 +16,14 @@ import {
   Sun,
 } from 'lucide-react';
 import WhatsAppButton from './sections/WhatsAppButton';
+import ResidentialSection from './sections/ResidentialSection';
 import './App.css';
 
 const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Why SMPS', href: '#why-smps' },
   { label: 'Services', href: '#services' },
+  { label: 'Residential', href: '#residential' },
   { label: 'Gallery', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -403,6 +405,8 @@ function App() {
             </div>
           </div>
         </section>
+
+        <ResidentialSection />
 
         <section id="projects" className="bg-[#080808] py-20 lg:py-28">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
