@@ -1,32 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 
 export default function WhatsAppButton() {
-  const [isVisible, setIsVisible] = useState(false);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Show button after scrolling past hero section
-      setIsVisible(window.scrollY > window.innerHeight * 0.5);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleClick = () => {
     const phoneNumber = '919611951518';
-    const message = encodeURIComponent('Hello, I would like to inquire about your MEP consultancy services.');
+    const message = encodeURIComponent('Hello, I would like to inquire about SM Power Solutions electrical services.');
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
 
   return (
-    <div
-      className={`fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-3 transition-all duration-500 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
-      }`}
-    >
+    <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-3">
       {/* Tooltip */}
       {isTooltipOpen && (
         <div className="mb-2 p-4 rounded-xl bg-white shadow-lg max-w-[250px] animate-in fade-in slide-in-from-bottom-2 duration-300">
@@ -51,7 +36,7 @@ export default function WhatsAppButton() {
       <button
         onClick={handleClick}
         onMouseEnter={() => setIsTooltipOpen(true)}
-        className="group relative w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
+        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
         aria-label="Chat on WhatsApp"
       >
         {/* Pulse animation */}
