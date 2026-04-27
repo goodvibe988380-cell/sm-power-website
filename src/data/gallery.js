@@ -16,24 +16,36 @@ export const gallery = [
   },
   {
     id: 3,
+    title: "Luxury Plumbing Work",
+    image: "/images/plumbing1.jpg",
+    status: "Completed"
+  },
+  {
+    id: 4,
+    title: "Modern Bathroom Installation",
+    image: "/images/plumbing2.jpg",
+    status: "Running"
+  },
+  {
+    id: 5,
     title: "HVAC System - Commercial Building",
     image: "/project_3.jpg",
     status: "Completed"
   },
   {
-    id: 4,
+    id: 6,
     title: "Electrical Panel - Office Complex",
     image: "/project_1.jpg",
     status: "Completed"
   },
   {
-    id: 5,
+    id: 7,
     title: "Water Supply System - Bungalow",
     image: "/project_2.jpg",
     status: "Running"
   },
   {
-    id: 6,
+    id: 8,
     title: "Smart Building Wiring - Penthouse",
     image: "/project_3.jpg",
     status: "Completed"

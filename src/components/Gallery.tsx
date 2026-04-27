@@ -11,11 +11,11 @@ export default function Gallery() {
     : gallery.filter(item => item.status === filter);
 
   return (
-    <section id="projects" className="py-20 bg-dark">
+    <section id="projects" className="py-20 bg-[#0f0f0f]">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <span className="inline-block font-mono text-xs uppercase tracking-[0.3em] text-gold mb-4">
+          <span className="inline-block font-mono text-xs uppercase tracking-[0.3em] text-[#d4af37] mb-4">
             Our Work
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -34,8 +34,8 @@ export default function Gallery() {
               onClick={() => setFilter(item)}
               className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
                 filter === item
-                  ? 'bg-gold text-dark'
-                  : 'bg-dark-light text-gray-300 hover:bg-gold/20 hover:text-gold'
+                  ? 'bg-[#d4af37] text-[#0f0f0f]'
+                  : 'bg-[#1a1a1a] text-gray-300 hover:bg-[#d4af37]/20 hover:text-[#d4af37]'
               }`}
             >
               {item}
@@ -48,7 +48,7 @@ export default function Gallery() {
           {filteredGallery.map((item) => (
             <div
               key={item.id}
-              className="group relative bg-dark-light rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+              className="group relative bg-[#1a1a1a] rounded-xl overflow-hidden shadow-lg hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] transition-all duration-300 hover:scale-[1.02]"
             >
               {/* Image Container */}
               <div className="relative aspect-[4/3] overflow-hidden">
@@ -57,24 +57,41 @@ export default function Gallery() {
                   alt={item.title}
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                 />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
-                {/* Status Badge */}
+                {/* Dark Overlay on Hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] via-[#0f0f0f]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Title + Status on Hover */}
+                <div className="absolute inset-0 flex flex-col justify-end p-5 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
+                  <span
+                    className={`inline-block self-start px-3 py-1 rounded-full text-xs font-medium mb-2 ${
+                      item.status === 'Completed'
+                        ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                        : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+                  <h3 className="text-lg font-semibold text-white">
+                    {item.title}
+                  </h3>
+                </div>
+
+                {/* Status Badge (always visible) */}
                 <span
-                  className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium ${
+                  className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium transition-opacity duration-300 ${
                     item.status === 'Completed'
                       ? 'bg-green-500/20 text-green-400 border border-green-500/30'
                       : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                  }`}
+                  } ${filter !== 'All' ? 'opacity-100' : 'group-hover:opacity-0'}`}
                 >
                   {item.status}
                 </span>
               </div>
 
-              {/* Content */}
-              <div className="p-5">
-                <h3 className="text-lg font-semibold text-white group-hover:text-gold transition-colors duration-300">
+              {/* Content (visible when not hovering) */}
+              <div className="p-5 group-hover:opacity-0 transition-opacity duration-300">
+                <h3 className="text-lg font-semibold text-white group-hover:text-[#d4af37] transition-colors duration-300">
                   {item.title}
                 </h3>
                 <p className="text-gray-500 text-sm mt-1">

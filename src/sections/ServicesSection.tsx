@@ -24,7 +24,9 @@ const services = [
   {
     icon: Pipe,
     title: 'Plumbing Services',
-    description: 'Installation, maintenance, and repair services.',
+    description: 'Premium plumbing solutions including installation, maintenance, and repair with high-quality fittings and modern designs.',
+    image: '/images/plumbing.jpg',
+    isPremium: true,
   },
   {
     icon: Network,
@@ -223,9 +225,21 @@ export default function ServicesSection() {
                 {services.map((service, index) => (
                   <div
                     key={index}
-                    className="service-card group p-4 rounded-xl bg-white/5 border border-white/10 hover:border-gold/50 hover:bg-white/10 transition-all duration-300 cursor-pointer"
+                    className={`service-card group p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#d4af37]/50 hover:bg-white/10 transition-all duration-300 cursor-pointer hover:scale-[1.02] ${
+                      service.isPremium ? 'sm:col-span-2 lg:col-span-1' : ''
+                    }`}
                   >
-                    <service.icon className="w-6 h-6 text-gold mb-3 group-hover:scale-110 transition-transform" />
+                    {service.image && (
+                      <div className="relative aspect-video rounded-lg overflow-hidden mb-3">
+                        <img
+                          src={service.image}
+                          alt={service.title}
+                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      </div>
+                    )}
+                    <service.icon className="w-6 h-6 text-[#d4af37] mb-3 group-hover:scale-110 transition-transform" />
                     <h3 className="font-heading font-semibold text-white text-sm mb-1">
                       {service.title}
                     </h3>
