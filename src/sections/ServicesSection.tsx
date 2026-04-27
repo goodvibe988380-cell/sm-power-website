@@ -24,8 +24,8 @@ const services = [
   {
     icon: Pipe,
     title: 'Plumbing Services',
-    description: 'Premium plumbing solutions including installation, maintenance, and repair with high-quality fittings and modern designs.',
-    image: '/images/plumbing.jpg',
+    description: 'Installation, maintenance, and repair with high-quality fittings and modern designs.',
+    image: '/electrical_services.jpg',
     isPremium: true,
   },
   {
