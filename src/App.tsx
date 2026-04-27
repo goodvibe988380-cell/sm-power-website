@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import WhatsAppButton from './sections/WhatsAppButton';
 import ResidentialSection from './sections/ResidentialSection';
+import Gallery from './components/Gallery';
 import './App.css';
 
 const navLinks = [
@@ -408,73 +409,7 @@ function App() {
 
         <ResidentialSection />
 
-        <section id="projects" className="bg-[#080808] py-20 lg:py-28">
-          <div className="mx-auto max-w-7xl px-5 lg:px-8">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div className="max-w-3xl">
-                <p className="font-mono text-xs uppercase tracking-[0.36em] text-[#D4AF37]">Project Gallery</p>
-                <h2 className="mt-4 font-heading text-4xl font-black leading-tight sm:text-5xl">
-                  Our completed electrical and ELV project work.
-                </h2>
-                <p className="mt-5 max-w-2xl text-base leading-8 text-white/62">
-                  Explore selected site work, completed installations, panel work, ELV systems and approval-related project support delivered by SM Power Solutions.
-                </p>
-              </div>
-              <div className="inline-flex w-fit items-center gap-3 rounded-full border border-[#D4AF37]/25 bg-[#D4AF37]/10 px-5 py-3 text-sm font-semibold text-[#D4AF37]">
-                <Images className="h-5 w-5" />
-                {projectCards.length} work samples
-              </div>
-            </div>
-
-            <div className="mt-12 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-              <article className="overflow-hidden rounded-2xl border border-[#D4AF37]/25 bg-white/[0.045]">
-                <div className="relative min-h-[460px]">
-                  <img src="/project_1.jpg" alt="Featured SM Power Solutions project work" className="absolute inset-0 h-full w-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/35 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-                    <span className="rounded-full border border-[#D4AF37]/35 bg-[#080808]/75 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-[#D4AF37]">
-                      Featured Work
-                    </span>
-                    <h3 className="mt-4 max-w-xl font-heading text-3xl font-black text-white sm:text-4xl">
-                      Electrical site execution and coordination
-                    </h3>
-                    <p className="mt-3 max-w-xl leading-7 text-white/68">
-                      Professional electrical planning, installation and site coordination for residential and commercial requirements.
-                    </p>
-                  </div>
-                </div>
-              </article>
-
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
-                {projectCards.slice(0, 2).map((project) => (
-                  <article key={project.title} className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045]">
-                    <img src={project.image} alt={project.title} className="h-52 w-full object-cover" loading="lazy" />
-                    <div className="p-5">
-                      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#D4AF37]">{project.category}</p>
-                      <h3 className="mt-2 font-heading text-xl font-bold">{project.title}</h3>
-                      <p className="mt-2 text-sm leading-6 text-white/60">{project.text}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {projectCards.slice(2).map((project) => (
-                <article key={project.title} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] transition-colors hover:border-[#D4AF37]/40">
-                  <div className="overflow-hidden">
-                    <img src={project.image} alt={project.title} className="h-60 w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-                  </div>
-                  <div className="p-5">
-                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#D4AF37]">{project.category}</p>
-                    <h3 className="mt-2 font-heading text-xl font-bold">{project.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-white/60">{project.text}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Gallery />
 
         <section id="contact" className="relative overflow-hidden bg-[#111111] py-20 lg:py-28">
           <img src="/contact_office.jpg" alt="SM Power Solutions contact office" className="absolute inset-0 h-full w-full object-cover opacity-18" />

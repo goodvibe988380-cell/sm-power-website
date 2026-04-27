@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, Zap, Cog, Droplets, Network } from 'lucide-react';
+import { ArrowRight, Zap, Cog, Droplets, Network, Pipe } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +20,11 @@ const services = [
     icon: Droplets,
     title: 'Plumbing Solutions',
     description: 'Water supply, drainage, and sanitary systems design.',
+  },
+  {
+    icon: Pipe,
+    title: 'Plumbing Services',
+    description: 'Installation, maintenance, and repair services.',
   },
   {
     icon: Network,
