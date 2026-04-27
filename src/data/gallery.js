@@ -4,26 +4,26 @@
 export const gallery = [
   {
     id: 1,
+    title: "Luxury Plumbing Work",
+    image: "/images/plumbing1.svg",
+    status: "Completed"
+  },
+  {
+    id: 2,
+    title: "Modern Bathroom Installation",
+    image: "/images/plumbing2.svg",
+    status: "Running"
+  },
+  {
+    id: 3,
     title: "Electrical Work - Villa Project",
     image: "/project_1.jpg",
     status: "Completed"
   },
   {
-    id: 2,
+    id: 4,
     title: "Plumbing Installation - Apartment",
     image: "/project_2.jpg",
-    status: "Running"
-  },
-  {
-    id: 3,
-    title: "Luxury Plumbing Work",
-    image: "/project_3.jpg",
-    status: "Completed"
-  },
-  {
-    id: 4,
-    title: "Modern Bathroom Installation",
-    image: "/project_1.jpg",
     status: "Running"
   },
   {

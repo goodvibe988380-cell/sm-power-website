@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect fill="#1a1a1a" width="800" height="600"/>
+  <rect fill="#2d2d2d" x="150" y="100" width="500" height="400" rx="15"/>
+  <rect fill="#3d3d3d" x="200" y="150" width="400" height="200" rx="10"/>
+  <rect fill="#6b7280" x="250" y="180" width="80" height="140" rx="5"/>
+  <rect fill="#6b7280" x="470" y="180" width="80" height="140" rx="5"/>
+  <rect fill="#6b7280" x="320" y="200" width="160" height="15" rx="3"/>
+  <rect fill="#6b7280" x="320" y="230" width="160" height="15" rx="3"/>
+  <circle fill="#f59e0b" cx="400" cy="280" r="50"/>
+  <circle fill="#1a1a1a" cx="400" cy="280" r="35"/>
+  <rect fill="#6b7280" x="395" y="280" width="10" height="60"/>
+  <text fill="#d4af37" x="400" y="520" font-family="Arial" font-size="28" text-anchor="middle">Modern Bathroom Installation</text>
+  <text fill="#f59e0b" x="400" y="555" font-family="Arial" font-size="16" text-anchor="middle">Running</text>
+</svg>

@@ -25,7 +25,7 @@ const services = [
     icon: Pipe,
     title: 'Plumbing Services',
     description: 'Installation, maintenance, and repair with high-quality fittings and modern designs.',
-    image: '/electrical_services.jpg',
+    image: '/images/plumbing.svg',
     isPremium: true,
   },
   {
