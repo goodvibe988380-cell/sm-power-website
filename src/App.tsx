@@ -4,7 +4,7 @@ import {
   Camera,
   CheckCircle2,
   ClipboardList,
-  Images,
+  Droplets,
   Landmark,
   Mail,
   MapPin,
@@ -46,6 +46,11 @@ const servicePillars = [
     description: 'Camera installation, data and access points, intercom, speakers, FA and PA systems and AMC.',
   },
   {
+    icon: Droplets,
+    title: 'Plumbing Services',
+    description: 'Water supply, drainage, bathroom fittings, repair work and clean plumbing installation support.',
+  },
+  {
     icon: Building2,
     title: 'ESCOM Office Works',
     description: 'Temporary and permanent power sanction, load changes, HT sanction, name changing and meter replacement.',
@@ -77,13 +82,24 @@ const detailedServices = [
     items: ['Camera installation and configuration', 'Data and access points', 'Intercom', 'Speaker', 'FA and PA systems', 'AMC'],
   },
   {
+    title: 'Plumbing Services',
+    items: [
+      'Residential plumbing repair',
+      'Bathroom plumbing installation',
+      'Water supply line work',
+      'Drainage and sanitary support',
+      'Apartment plumbing upgrades',
+      'Maintenance and leak rectification',
+    ],
+  },
+  {
     title: 'ESCOM Office Works',
     items: ['Temporary power sanction', 'Permanent power sanction', 'Load enhancement / reduction', 'HT power sanction', 'Name changing', 'Meter replacement'],
   },
 ];
 
 const trustStats = [
-  { value: '4', label: 'Core service verticals' },
+  { value: '5', label: 'Core service verticals' },
   { value: '360', label: 'Design to handover support' },
   { value: '24/7', label: 'WhatsApp enquiry access' },
 ];
@@ -138,57 +154,6 @@ const businessDetails = [
   ['Website', 'smpowersolutions.in'],
 ];
 
-const projectCards = [
-  {
-    title: 'Electrical Execution',
-    category: 'Electrical',
-    image: '/electrical_services.jpg',
-    text: 'Clean wiring, terminations and installation support for residential and commercial spaces.',
-  },
-  {
-    title: 'Design Consultation',
-    category: 'Design',
-    image: '/design_consultation.jpg',
-    text: 'Documentation-first planning for load calculation, layouts, SLD and approvals.',
-  },
-  {
-    title: 'ELV Systems',
-    category: 'ELV',
-    image: '/elv_services.jpg',
-    text: 'Security, access, communication and building low-voltage infrastructure.',
-  },
-  {
-    title: 'ESCOM Office Support',
-    category: 'Approvals',
-    image: '/escom_office.jpg',
-    text: 'Power sanction, meter replacement and load change coordination support.',
-  },
-  {
-    title: 'Panel Quality Work',
-    category: 'Panels',
-    image: '/quality_panel.jpg',
-    text: 'Neat panel work, reliable protection and site-ready electrical finishing.',
-  },
-  {
-    title: 'Site Coordination',
-    category: 'Site Work',
-    image: '/project_1.jpg',
-    text: 'On-site electrical progress, coordination and handover-focused execution.',
-  },
-  {
-    title: 'Solar & Lighting',
-    category: 'Installation',
-    image: '/project_2.jpg',
-    text: 'Lighting, solar and service installation for modern building requirements.',
-  },
-  {
-    title: 'Commercial Systems',
-    category: 'Commercial',
-    image: '/project_3.jpg',
-    text: 'Electrical and ELV support for offices, shops and commercial interiors.',
-  },
-];
-
 function App() {
   return (
     <div className="min-h-screen bg-[#080808] text-white">
@@ -227,12 +192,12 @@ function App() {
           <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl items-center gap-10 px-5 py-16 lg:grid-cols-[1fr_0.78fr] lg:px-8">
             <div className="max-w-3xl">
               <img src="/smps-logo.svg" alt="SM Power Solutions logo" className="mb-6 h-20 w-20 rounded-3xl shadow-[0_0_38px_rgba(212,175,55,0.28)]" />
-              <p className="font-mono text-xs uppercase tracking-[0.36em] text-[#D4AF37]">Shivamogga electrical and ELV specialists</p>
+              <p className="font-mono text-xs uppercase tracking-[0.36em] text-[#D4AF37]">Shivamogga electrical, ELV and plumbing specialists</p>
               <h1 className="mt-5 font-heading text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
                 Premium electrical work for modern spaces.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
-                SM Power Solutions delivers design consultation, electrical execution, ELV systems and ESCOM office support with clean planning, safe installation and dependable site work.
+                SM Power Solutions delivers design consultation, electrical execution, ELV systems, plumbing work and ESCOM office support with clean planning, safe installation and dependable site work.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a href="#services" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#D4AF37] px-7 py-4 font-bold text-[#080808] transition-transform hover:-translate-y-0.5">
@@ -254,10 +219,10 @@ function App() {
 
             <div className="grid gap-4 rounded-2xl border border-white/10 bg-white/[0.06] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.36)] backdrop-blur-sm">
               <img src="/quality_panel.jpg" alt="Electrical panel quality work" className="h-64 w-full rounded-xl object-cover sm:h-80" />
-              <div className="grid grid-cols-3 gap-3">
-                {['SLD', 'ELV', 'ESCOM'].map((item) => (
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                {['SLD', 'ELV', 'Plumbing', 'ESCOM'].map((item) => (
                   <div key={item} className="rounded-xl border border-[#D4AF37]/25 bg-[#D4AF37]/10 px-3 py-4 text-center">
-                    <p className="font-heading text-lg font-black text-[#D4AF37]">{item}</p>
+                    <p className="font-heading text-base font-black text-[#D4AF37] sm:text-lg">{item}</p>
                     <p className="mt-1 text-xs text-white/55">Support</p>
                   </div>
                 ))}
@@ -282,7 +247,7 @@ function App() {
               <div className="mt-8 grid gap-4 sm:grid-cols-3">
                 {[
                   ['Design', 'Drawings, SLD and calculation'],
-                  ['Install', 'Wiring, lighting and panels'],
+                  ['Install', 'Wiring, lighting, panels and plumbing'],
                   ['Approve', 'ESCOM coordination support'],
                 ].map(([title, text]) => (
                   <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.045] p-5">
@@ -353,15 +318,15 @@ function App() {
               <div className="max-w-3xl">
                 <p className="font-mono text-xs uppercase tracking-[0.36em] text-[#D4AF37]">Core Services</p>
                 <h2 className="mt-4 font-heading text-4xl font-black leading-tight sm:text-5xl">
-                  Complete electrical, ELV and approval support.
+                  Complete electrical, ELV, plumbing and approval support.
                 </h2>
               </div>
               <p className="max-w-md text-sm leading-7 text-white/56">
-                A single point of support for planning, installation, low-voltage systems, lighting, automation, maintenance and power sanction work.
+                A single point of support for planning, installation, low-voltage systems, lighting, plumbing, automation, maintenance and power sanction work.
               </p>
             </div>
 
-            <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
               {servicePillars.map((service) => (
                 <article key={service.title} className="group rounded-2xl border border-white/10 bg-[#080808] p-6 transition-colors hover:border-[#D4AF37]/45">
                   <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
@@ -393,7 +358,7 @@ function App() {
               <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="font-mono text-xs uppercase tracking-[0.32em] text-[#D4AF37]">Industries Served</p>
-                  <h3 className="mt-3 font-heading text-2xl font-bold text-white">Built for residential, commercial and industrial electrical needs.</h3>
+                  <h3 className="mt-3 font-heading text-2xl font-bold text-white">Built for residential, commercial and industrial electrical and plumbing needs.</h3>
                 </div>
                 <div className="flex flex-wrap gap-3">
                   {industries.map((industry) => (
@@ -429,7 +394,7 @@ function App() {
                 <img src="/smps-logo.svg" alt="" className="h-14 w-14 rounded-2xl" />
                 <div>
                   <p className="font-heading text-xl font-black">SM Power Solutions</p>
-                  <p className="mt-1 text-sm text-white/56">Electrical services, ELV and ESCOM works</p>
+                  <p className="mt-1 text-sm text-white/56">Electrical services, plumbing, ELV and ESCOM works</p>
                 </div>
               </div>
               <div className="grid gap-4">
@@ -466,7 +431,7 @@ function App() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 text-center text-sm text-white/52 sm:flex-row sm:text-left">
           <div className="flex items-center gap-3">
             <img src="/smps-logo.svg" alt="" className="h-10 w-10 rounded-xl" />
-            <span>SM Power Solutions. Electrical Services, ELV and ESCOM Office Works.</span>
+            <span>SM Power Solutions. Electrical Services, Plumbing, ELV and ESCOM Office Works.</span>
           </div>
           <a href="mailto:prithviraj.smps@gmail.com" className="transition-colors hover:text-[#D4AF37]">
             prithviraj.smps@gmail.com

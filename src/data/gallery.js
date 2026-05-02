@@ -4,14 +4,14 @@
 export const gallery = [
   {
     id: 1,
-    title: "Luxury Plumbing Work",
-    image: "/images/plumbing1.svg",
+    title: "Residential Plumbing Repair",
+    image: "/images/plumbing_1.jpg",
     status: "Completed"
   },
   {
     id: 2,
-    title: "Modern Bathroom Installation",
-    image: "/images/plumbing2.svg",
+    title: "Modern Bathroom Plumbing Installation",
+    image: "/images/plumbing_2.jpg",
     status: "Running"
   },
   {
@@ -22,13 +22,13 @@ export const gallery = [
   },
   {
     id: 4,
-    title: "Plumbing Installation - Apartment",
-    image: "/project_2.jpg",
+    title: "Apartment Plumbing System Upgrade",
+    image: "/images/plumbing_3.jpg",
     status: "Running"
   },
   {
     id: 5,
-    title: "HVAC System - Commercial Building",
+    title: "Commercial HVAC System Installation",
     image: "/project_2.jpg",
     status: "Completed"
   },
@@ -40,8 +40,8 @@ export const gallery = [
   },
   {
     id: 7,
-    title: "Water Supply System - Bungalow",
-    image: "/project_1.jpg",
+    title: "Bungalow Water Supply System",
+    image: "/images/plumbing_4.jpg",
     status: "Running"
   },
   {

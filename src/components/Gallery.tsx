@@ -8,7 +8,7 @@ function ImageWithFallback({ src, alt }: { src: string; alt: string }) {
   
   return (
     <img
-      src={error ? '/project_1.jpg' : src}
+      src={error ? '/images/plumbing_1.jpg' : src}
       alt={alt}
       className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
       onError={() => setError(true)}
@@ -32,10 +32,10 @@ export default function Gallery() {
             Our Work
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Project Gallery
+            Plumbing & Project Gallery
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Explore our completed and ongoing projects showcasing quality craftsmanship
+            Explore completed and ongoing work, including visible plumbing repair, bathroom installation and water supply projects.
           </p>
         </div>
 
