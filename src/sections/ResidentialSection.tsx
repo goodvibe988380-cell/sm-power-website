@@ -5,25 +5,25 @@ const residentialServices = [
     icon: Home,
     title: 'Villa & Bungalow',
     body: 'Complete electrical setup for luxury villas and independent houses.',
-    image: '/residential_villa.svg',
+    image: '/images/residential_villa.jpg',
   },
   {
     icon: Building2,
     title: 'Apartments & Flats',
     body: 'ELV systems, lighting, and power distribution for residential complexes.',
-    image: '/apartment_elv.svg',
+    image: '/images/apartment_complex.jpg',
   },
   {
     icon: Lamp,
     title: 'Interior Lighting',
     body: 'Designer lighting solutions for living rooms, bedrooms, and kitchens.',
-    image: '/home_interior.svg',
+    image: '/images/interior_lighting.jpg',
   },
   {
     icon: Zap,
     title: 'Smart Home Setup',
     body: 'Home automation, smart lighting, and modern electrical solutions.',
-    image: '/penthouse_lighting.svg',
+    image: '/images/smart_home.jpg',
   },
 ]
 
