@@ -1,9 +1,7 @@
 import {
   ArrowRight,
-  Building2,
-  Camera,
+  BatteryCharging,
   CheckCircle2,
-  ClipboardList,
   Droplets,
   Landmark,
   Mail,
@@ -14,7 +12,9 @@ import {
   ShieldCheck,
   Sparkles,
   Sun,
+  Wrench,
 } from 'lucide-react';
+import { type FormEvent, useEffect, useState } from 'react';
 import WhatsAppButton from './sections/WhatsAppButton';
 import ResidentialSection from './sections/ResidentialSection';
 import Gallery from './components/Gallery';
@@ -31,29 +31,29 @@ const navLinks = [
 
 const servicePillars = [
   {
-    icon: ClipboardList,
-    title: 'Design & Consultation',
-    description: 'MEP planning, SLD, panel design, load calculation, coordination drawings and approval support.',
-  },
-  {
     icon: PlugZap,
-    title: 'Electrical & Power Systems',
-    description: 'Wiring, earthing, lightning protection, solar, lighting, automation, panels, EV points and AMC.',
+    title: 'Electrical Works',
+    description: 'Premium wiring, panels, earthing, lighting, automation and power distribution for safe modern spaces.',
   },
   {
-    icon: Camera,
-    title: 'Networking & ELV',
-    description: 'CCTV, data points, networking, access control, intercom, speakers, FA and PA systems and AMC.',
+    icon: Sun,
+    title: 'Solar Installation',
+    description: 'Efficient solar planning and installation support for homes, apartments and commercial properties.',
+  },
+  {
+    icon: BatteryCharging,
+    title: 'Power Backup',
+    description: 'Reliable backup power solutions, EV readiness and system planning for uninterrupted operations.',
+  },
+  {
+    icon: Wrench,
+    title: 'Maintenance',
+    description: 'Responsive AMC, fault rectification, inspection and preventive maintenance for long-term performance.',
   },
   {
     icon: Droplets,
-    title: 'Plumbing & Water Systems',
-    description: 'Water supply, drainage, sanitary lines, bathroom fittings, repair work and clean installation support.',
-  },
-  {
-    icon: Building2,
-    title: 'HVAC & Approval Support',
-    description: 'HVAC coordination along with temporary and permanent power sanction, load changes and meter support.',
+    title: 'Plumbing',
+    description: 'Clean water supply, drainage, sanitary fittings, bathroom installation and repair support.',
   },
 ];
 
@@ -99,9 +99,16 @@ const detailedServices = [
 ];
 
 const trustStats = [
-  { value: '5', label: 'Core service verticals' },
-  { value: '360', label: 'Design to handover support' },
-  { value: '24/7', label: 'WhatsApp enquiry access' },
+  { value: '500+', label: 'Projects' },
+  { value: '24/7', label: 'Fast installation support' },
+  { value: '100%', label: 'Customer-focused pricing' },
+];
+
+const whyCounters = [
+  { value: 500, suffix: '+', label: 'Projects' },
+  { value: 24, suffix: '/7', label: 'Fast Installation' },
+  { value: 100, suffix: '%', label: 'Affordable Pricing' },
+  { value: 10, suffix: '+', label: 'Expert Team' },
 ];
 
 const processSteps = [
@@ -161,9 +168,68 @@ const heroSupportTiles = [
   { label: 'NETWORKING', className: 'text-[14px] sm:text-lg' },
 ];
 
+function CountUp({ value, suffix }: { value: number; suffix: string }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let frame = 0;
+    const totalFrames = 55;
+    const timer = window.setInterval(() => {
+      frame += 1;
+      const progress = Math.min(frame / totalFrames, 1);
+      setCount(Math.round(value * (1 - Math.pow(1 - progress, 3))));
+      if (frame >= totalFrames) {
+        window.clearInterval(timer);
+      }
+    }, 24);
+
+    return () => window.clearInterval(timer);
+  }, [value]);
+
+  return (
+    <span>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
 function App() {
+  const [showIntro, setShowIntro] = useState(true);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowIntro(false), 3200);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  const handleConsultationSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const name = String(formData.get('name') || '').trim();
+    const phone = String(formData.get('phone') || '').trim();
+    const message = String(formData.get('message') || '').trim();
+    const text = encodeURIComponent(
+      `Hi SM Power Solutions, I need a free consultation.\nName: ${name}\nPhone: ${phone}\nRequirement: ${message}`
+    );
+    window.open(`https://wa.me/919611951518?text=${text}`, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="min-h-screen bg-[#080808] text-white">
+      {showIntro && (
+        <div className="intro-overlay fixed inset-0 z-[999] flex items-center justify-center overflow-hidden bg-black">
+          <div className="circuit-grid" aria-hidden="true" />
+          <div className="energy-trace energy-trace-horizontal" aria-hidden="true" />
+          <div className="energy-trace energy-trace-vertical" aria-hidden="true" />
+          <div className="activation-flash" aria-hidden="true" />
+          <div className="relative z-10 flex flex-col items-center px-6 text-center">
+            <img src="/smps-logo.png" alt="SM Power Solutions logo" className="intro-logo h-32 w-auto sm:h-40" />
+            <p className="intro-tagline mt-7 font-heading text-sm font-bold uppercase tracking-[0.28em] text-[#FFD700] sm:text-lg">
+              Power Rules the World. We Rule Power.
+            </p>
+          </div>
+        </div>
+      )}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#080808]/90 backdrop-blur-md">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:h-20 lg:px-8">
           <a href="#" className="flex items-center gap-3" aria-label="SM Power Solutions home">
@@ -179,7 +245,7 @@ function App() {
                 {link.label}
               </a>
             ))}
-            <a href="#contact" className="rounded-full bg-[#D4AF37] px-5 py-2.5 text-sm font-bold text-[#090909] transition-transform hover:-translate-y-0.5">
+            <a href="https://wa.me/919611951518" className="rounded-full bg-[#D4AF37] px-5 py-2.5 text-sm font-bold text-[#090909] transition-transform hover:-translate-y-0.5 hover:shadow-[0_0_26px_rgba(255,215,0,0.32)]">
               Get Quote
             </a>
           </div>
@@ -191,53 +257,48 @@ function App() {
       </header>
 
       <main>
-        <section className="relative isolate min-h-screen overflow-hidden pt-16 lg:pt-20">
+        <section id="home" className="relative isolate min-h-screen overflow-hidden pt-16 lg:pt-20">
           <img src="/hero_control_room.jpg" alt="MEP control room" className="absolute inset-0 -z-20 h-full w-full object-cover" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#080808] via-[#080808]/82 to-[#080808]/30" />
+          <div className="absolute inset-0 -z-10 bg-[linear-gradient(135deg,rgba(0,0,0,0.94),rgba(17,17,17,0.86),rgba(0,0,0,0.72))]" />
+          <div className="energy-lines absolute inset-0 -z-10 opacity-55" aria-hidden="true" />
           <div className="absolute inset-x-0 bottom-0 -z-10 h-52 bg-gradient-to-t from-[#080808] to-transparent" />
 
-          <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl items-center gap-10 px-5 py-16 lg:grid-cols-[1fr_0.78fr] lg:px-8">
-            <div className="max-w-3xl">
-              <div className="mb-8 inline-flex flex-col items-start">
-                <img src="/smps-logo.png" alt="SM Power Solutions logo" className="h-28 w-auto shadow-[0_0_42px_rgba(255,196,0,0.3)] sm:h-32" />
-                <p className="mt-5 font-heading text-3xl font-black uppercase leading-none tracking-[0.04em] text-[#FFC400] sm:text-5xl">
-                  SM POWER SOLUTIONS
-                </p>
-                <p className="mt-5 font-mono text-xs uppercase tracking-[0.22em] text-[#FFC400] sm:text-sm">
-                  POWER RULES THE WORLD WE RULE THE POWER
-                </p>
-              </div>
-              <h1 className="mt-5 font-heading text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
-                Premium MEP services for modern spaces.
+          <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-7xl flex-col items-center justify-center gap-10 px-5 py-14 text-center lg:px-8">
+            <div className="mx-auto max-w-5xl">
+              <img src="/smps-logo.png" alt="SM Power Solutions logo" className="mx-auto h-28 w-auto drop-shadow-[0_0_34px_rgba(255,215,0,0.28)] sm:h-36" />
+              <h1 className="mt-8 font-heading text-4xl font-black uppercase leading-[0.95] tracking-[0.08em] text-white sm:text-6xl lg:text-7xl">
+                SM <span className="text-[#FFD700]">POWER</span> SOLUTIONS
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
-                SM Power Solutions delivers HVAC, electrical, plumbing, networking, ELV and approval support with clean planning, safe installation and dependable site execution.
+              <p className="mx-auto mt-5 max-w-3xl font-heading text-xl font-semibold text-[#FFD700] sm:text-2xl">
+                Power Rules the World. We Rule Power.
               </p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <a href="#services" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#D4AF37] px-7 py-4 font-bold text-[#080808] transition-transform hover:-translate-y-0.5">
-                  Explore Services <ArrowRight className="h-5 w-5" />
+              <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-white/72 sm:text-lg">
+                Premium MEP services for HVAC, electrical, plumbing, networking, solar, backup power and maintenance, delivered with clean planning and dependable site execution.
+              </p>
+              <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+                <a href="https://wa.me/919611951518?text=Hi%20SM%20Power%20Solutions%2C%20I%20need%20a%20free%20quote." className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FFD700] px-8 py-4 font-bold text-black shadow-[0_0_34px_rgba(255,215,0,0.24)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_44px_rgba(255,215,0,0.42)]">
+                  Get Free Quote <ArrowRight className="h-5 w-5" />
                 </a>
-                <a href="tel:+919611951518" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-4 font-semibold text-white transition-colors hover:border-[#D4AF37] hover:text-[#D4AF37]">
-                  <Phone className="h-5 w-5" /> Call Now
+                <a href="#services" className="inline-flex items-center justify-center gap-2 rounded-full border border-[#FFD700]/55 px-8 py-4 font-semibold text-white transition-all duration-300 hover:scale-105 hover:border-[#FFD700] hover:text-[#FFD700]">
+                  Explore Services
                 </a>
               </div>
-              <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
+              <div className="mx-auto mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
                 {trustStats.map((stat) => (
                   <div key={stat.label} className="rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-5">
-                    <p className="font-heading text-2xl font-black text-[#D4AF37]">{stat.value}</p>
+                    <p className="font-heading text-2xl font-black text-[#FFD700]">{stat.value}</p>
                     <p className="mt-1 text-xs leading-5 text-white/56">{stat.label}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="grid gap-4 rounded-2xl border border-white/10 bg-white/[0.06] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.36)] backdrop-blur-sm">
-              <img src="/quality_panel.jpg" alt="MEP services quality work" className="h-64 w-full rounded-xl object-cover sm:h-80" />
-              <div className="grid grid-cols-2 gap-3">
+            <div className="w-full max-w-4xl rounded-2xl border border-white/10 bg-black/42 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.36)] backdrop-blur-sm">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
                 {heroSupportTiles.map((item) => (
-                  <div key={item.label} className="flex min-h-24 min-w-0 flex-col items-center justify-center rounded-xl border border-[#D4AF37]/25 bg-[#D4AF37]/10 px-2 py-4 text-center sm:min-h-28 sm:px-4">
-                    <p className={`w-full whitespace-nowrap font-heading font-black uppercase leading-none tracking-normal text-[#D4AF37] ${item.className}`}>{item.label}</p>
-                    <p className="mt-1 text-xs text-white/55">Support</p>
+                  <div key={item.label} className="flex min-h-24 min-w-0 flex-col items-center justify-center rounded-xl border border-[#FFD700]/25 bg-[#FFD700]/10 px-2 py-4 text-center">
+                    <p className={`w-full whitespace-nowrap font-heading font-black uppercase leading-none tracking-normal text-[#FFD700] ${item.className}`}>{item.label}</p>
+                    <p className="mt-1 text-xs text-white/55">MEP Support</p>
                   </div>
                 ))}
               </div>
@@ -302,6 +363,17 @@ function App() {
               </div>
             </div>
 
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {whyCounters.map((counter) => (
+                <div key={counter.label} className="rounded-2xl border border-[#FFD700]/20 bg-black/55 p-6 text-center shadow-[0_18px_50px_rgba(0,0,0,0.24)]">
+                  <p className="font-heading text-4xl font-black text-[#FFD700]">
+                    <CountUp value={counter.value} suffix={counter.suffix} />
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-white/70">{counter.label}</p>
+                </div>
+              ))}
+            </div>
+
             <div className="mt-12 grid gap-6 lg:grid-cols-[0.82fr_1.18fr]">
               <div className="overflow-hidden rounded-2xl border border-[#D4AF37]/20">
                 <img src="/capabilities_analysis.jpg" alt="MEP planning and analysis" className="h-full min-h-[420px] w-full object-cover" loading="lazy" />
@@ -342,8 +414,8 @@ function App() {
 
             <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
               {servicePillars.map((service) => (
-                <article key={service.title} className="group rounded-2xl border border-white/10 bg-[#080808] p-6 transition-colors hover:border-[#D4AF37]/45">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
+                <article key={service.title} className="group rounded-2xl border border-white/10 bg-[#080808] p-6 transition-all duration-300 hover:-translate-y-2 hover:border-[#FFD700]/50 hover:shadow-[0_0_34px_rgba(255,215,0,0.16)]">
+                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#FFD700]/10 text-[#FFD700] transition-transform duration-300 group-hover:scale-105">
                     <service.icon className="h-6 w-6" />
                   </div>
                   <h3 className="mt-5 font-heading text-xl font-bold">{service.title}</h3>
@@ -425,6 +497,34 @@ function App() {
                   <span className="font-semibold">Shivamogga, Karnataka</span>
                 </div>
               </div>
+              <form onSubmit={handleConsultationSubmit} className="mt-6 rounded-xl border border-[#FFD700]/20 bg-black/35 p-4">
+                <h3 className="font-heading text-xl font-black text-white">Get Your Free Consultation Today</h3>
+                <div className="mt-4 grid gap-3">
+                  <input
+                    name="name"
+                    required
+                    placeholder="Name"
+                    className="h-12 rounded-xl border border-white/10 bg-[#080808]/70 px-4 text-sm text-white outline-none transition-colors placeholder:text-white/38 focus:border-[#FFD700]/70"
+                  />
+                  <input
+                    name="phone"
+                    required
+                    inputMode="tel"
+                    placeholder="Phone"
+                    className="h-12 rounded-xl border border-white/10 bg-[#080808]/70 px-4 text-sm text-white outline-none transition-colors placeholder:text-white/38 focus:border-[#FFD700]/70"
+                  />
+                  <textarea
+                    name="message"
+                    required
+                    rows={4}
+                    placeholder="Tell us your requirement"
+                    className="resize-none rounded-xl border border-white/10 bg-[#080808]/70 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/38 focus:border-[#FFD700]/70"
+                  />
+                  <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FFD700] px-6 py-3 font-bold text-black transition-all duration-300 hover:scale-105 hover:shadow-[0_0_32px_rgba(255,215,0,0.34)]">
+                    Send on WhatsApp <ArrowRight className="h-5 w-5" />
+                  </button>
+                </div>
+              </form>
               <dl className="mt-5 grid gap-3 rounded-xl border border-white/10 bg-[#080808]/50 p-4">
                 {businessDetails.map(([label, value]) => (
                   <div key={label} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
