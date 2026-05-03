@@ -154,15 +154,22 @@ const businessDetails = [
   ['Website', 'smpowersolutions.in'],
 ];
 
+const heroSupportTiles = [
+  { label: 'HVAC', className: 'text-xl sm:text-2xl' },
+  { label: 'ELECTRICAL', className: 'text-[15px] sm:text-xl' },
+  { label: 'PLUMBING', className: 'text-[15px] sm:text-xl' },
+  { label: 'NETWORKING', className: 'text-[14px] sm:text-lg' },
+];
+
 function App() {
   return (
     <div className="min-h-screen bg-[#080808] text-white">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#080808]/90 backdrop-blur-md">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:h-20 lg:px-8">
           <a href="#" className="flex items-center gap-3" aria-label="SM Power Solutions home">
-            <img src="/smps-logo.svg" alt="" className="h-11 w-11 rounded-2xl shadow-[0_0_24px_rgba(212,175,55,0.18)]" />
-            <span className="font-heading text-base font-black tracking-[0.14em] sm:text-lg">
-              SM <span className="text-[#D4AF37]">POWER</span> SOLUTIONS
+            <img src="/smps-logo.png" alt="" className="h-11 w-auto shadow-[0_0_24px_rgba(255,196,0,0.22)]" />
+            <span className="font-heading text-base font-black tracking-[0.14em] text-[#FFC400] sm:text-lg">
+              SM POWER SOLUTIONS
             </span>
           </a>
 
@@ -191,8 +198,15 @@ function App() {
 
           <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl items-center gap-10 px-5 py-16 lg:grid-cols-[1fr_0.78fr] lg:px-8">
             <div className="max-w-3xl">
-              <img src="/smps-logo.svg" alt="SM Power Solutions logo" className="mb-6 h-20 w-20 rounded-3xl shadow-[0_0_38px_rgba(212,175,55,0.28)]" />
-              <p className="font-mono text-xs uppercase tracking-[0.36em] text-[#D4AF37]">Shivamogga electrical, ELV and plumbing specialists</p>
+              <div className="mb-8 inline-flex flex-col items-start">
+                <img src="/smps-logo.png" alt="SM Power Solutions logo" className="h-28 w-auto shadow-[0_0_42px_rgba(255,196,0,0.3)] sm:h-32" />
+                <p className="mt-5 font-heading text-3xl font-black uppercase leading-none tracking-[0.04em] text-[#FFC400] sm:text-5xl">
+                  SM POWER SOLUTIONS
+                </p>
+                <p className="mt-5 font-mono text-xs uppercase tracking-[0.22em] text-[#FFC400] sm:text-sm">
+                  POWER RULES THE WORLD WE RULE THE POWER
+                </p>
+              </div>
               <h1 className="mt-5 font-heading text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
                 Premium electrical work for modern spaces.
               </h1>
@@ -219,10 +233,10 @@ function App() {
 
             <div className="grid gap-4 rounded-2xl border border-white/10 bg-white/[0.06] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.36)] backdrop-blur-sm">
               <img src="/quality_panel.jpg" alt="Electrical panel quality work" className="h-64 w-full rounded-xl object-cover sm:h-80" />
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                {['SLD', 'ELV', 'Plumbing', 'ESCOM'].map((item) => (
-                  <div key={item} className="rounded-xl border border-[#D4AF37]/25 bg-[#D4AF37]/10 px-3 py-4 text-center">
-                    <p className="font-heading text-base font-black text-[#D4AF37] sm:text-lg">{item}</p>
+              <div className="grid grid-cols-2 gap-3">
+                {heroSupportTiles.map((item) => (
+                  <div key={item.label} className="flex min-h-24 min-w-0 flex-col items-center justify-center rounded-xl border border-[#D4AF37]/25 bg-[#D4AF37]/10 px-2 py-4 text-center sm:min-h-28 sm:px-4">
+                    <p className={`w-full whitespace-nowrap font-heading font-black uppercase leading-none tracking-normal text-[#D4AF37] ${item.className}`}>{item.label}</p>
                     <p className="mt-1 text-xs text-white/55">Support</p>
                   </div>
                 ))}
@@ -391,10 +405,10 @@ function App() {
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur-sm">
               <div className="mb-6 flex items-center gap-4 border-b border-white/10 pb-6">
-                <img src="/smps-logo.svg" alt="" className="h-14 w-14 rounded-2xl" />
+                <img src="/smps-logo.png" alt="" className="h-14 w-auto" />
                 <div>
-                  <p className="font-heading text-xl font-black">SM Power Solutions</p>
-                  <p className="mt-1 text-sm text-white/56">Electrical services, plumbing, ELV and ESCOM works</p>
+                  <p className="font-heading text-xl font-black uppercase text-[#FFC400]">SM Power Solutions</p>
+                  <p className="mt-1 text-sm uppercase tracking-[0.12em] text-[#FFC400]/80">Power Rules The World We Rule The Power</p>
                 </div>
               </div>
               <div className="grid gap-4">
@@ -430,8 +444,8 @@ function App() {
       <footer className="border-t border-white/10 bg-[#080808] px-5 py-8">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 text-center text-sm text-white/52 sm:flex-row sm:text-left">
           <div className="flex items-center gap-3">
-            <img src="/smps-logo.svg" alt="" className="h-10 w-10 rounded-xl" />
-            <span>SM Power Solutions. Electrical Services, Plumbing, ELV and ESCOM Office Works.</span>
+            <img src="/smps-logo.png" alt="" className="h-10 w-auto" />
+            <span>SM Power Solutions. Power Rules The World We Rule The Power.</span>
           </div>
           <a href="mailto:prithviraj.smps@gmail.com" className="transition-colors hover:text-[#D4AF37]">
             prithviraj.smps@gmail.com
