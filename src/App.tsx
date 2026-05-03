@@ -33,27 +33,27 @@ const servicePillars = [
   {
     icon: ClipboardList,
     title: 'Design & Consultation',
-    description: 'SLD, panel designing, looping drawing, switch box schedule, load calculation and power sanction.',
+    description: 'MEP planning, SLD, panel design, load calculation, coordination drawings and approval support.',
   },
   {
     icon: PlugZap,
-    title: 'Electrical Services',
-    description: 'House wiring, earthing, lightning arrestor, solar panels, lighting, automation, panels, EV points and AMC.',
+    title: 'Electrical & Power Systems',
+    description: 'Wiring, earthing, lightning protection, solar, lighting, automation, panels, EV points and AMC.',
   },
   {
     icon: Camera,
-    title: 'Extra Low Voltage',
-    description: 'Camera installation, data and access points, intercom, speakers, FA and PA systems and AMC.',
+    title: 'Networking & ELV',
+    description: 'CCTV, data points, networking, access control, intercom, speakers, FA and PA systems and AMC.',
   },
   {
     icon: Droplets,
-    title: 'Plumbing Services',
-    description: 'Water supply, drainage, bathroom fittings, repair work and clean plumbing installation support.',
+    title: 'Plumbing & Water Systems',
+    description: 'Water supply, drainage, sanitary lines, bathroom fittings, repair work and clean installation support.',
   },
   {
     icon: Building2,
-    title: 'ESCOM Office Works',
-    description: 'Temporary and permanent power sanction, load changes, HT sanction, name changing and meter replacement.',
+    title: 'HVAC & Approval Support',
+    description: 'HVAC coordination along with temporary and permanent power sanction, load changes and meter support.',
   },
 ];
 
@@ -107,7 +107,7 @@ const trustStats = [
 const processSteps = [
   {
     title: 'Site Visit & Requirement Study',
-    text: 'We understand the site, load needs, electrical scope, safety requirements and approval path before execution begins.',
+    text: 'We understand the site, MEP scope, load needs, service routing, safety requirements and approval path before execution begins.',
   },
   {
     title: 'Design, Estimate & Documentation',
@@ -115,7 +115,7 @@ const processSteps = [
   },
   {
     title: 'Installation & Coordination',
-    text: 'Wiring, panel termination, ELV, lighting, earthing, automation and site work are coordinated cleanly.',
+    text: 'HVAC coordination, wiring, plumbing, networking, ELV, lighting, earthing, automation and site work are coordinated cleanly.',
   },
   {
     title: 'Testing, Handover & AMC',
@@ -126,8 +126,8 @@ const processSteps = [
 const whyChoose = [
   {
     icon: ShieldCheck,
-    title: 'Safety-first execution',
-    text: 'Practical electrical work with attention to protection, neatness and long-term reliability.',
+    title: 'Safety-first MEP execution',
+    text: 'Practical MEP work with attention to protection, neatness, service access and long-term reliability.',
   },
   {
     icon: Landmark,
@@ -142,7 +142,7 @@ const whyChoose = [
   {
     icon: Sun,
     title: 'Future-ready systems',
-    text: 'Solar, EV charging, ELV, access points and automation options planned for evolving needs.',
+    text: 'HVAC, solar, EV charging, ELV, networking and automation options planned for evolving needs.',
   },
 ];
 
@@ -192,7 +192,7 @@ function App() {
 
       <main>
         <section className="relative isolate min-h-screen overflow-hidden pt-16 lg:pt-20">
-          <img src="/hero_control_room.jpg" alt="Electrical control room" className="absolute inset-0 -z-20 h-full w-full object-cover" />
+          <img src="/hero_control_room.jpg" alt="MEP control room" className="absolute inset-0 -z-20 h-full w-full object-cover" />
           <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#080808] via-[#080808]/82 to-[#080808]/30" />
           <div className="absolute inset-x-0 bottom-0 -z-10 h-52 bg-gradient-to-t from-[#080808] to-transparent" />
 
@@ -208,10 +208,10 @@ function App() {
                 </p>
               </div>
               <h1 className="mt-5 font-heading text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
-                Premium electrical work for modern spaces.
+                Premium MEP services for modern spaces.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
-                SM Power Solutions delivers design consultation, electrical execution, ELV systems, plumbing work and ESCOM office support with clean planning, safe installation and dependable site work.
+                SM Power Solutions delivers HVAC, electrical, plumbing, networking, ELV and approval support with clean planning, safe installation and dependable site execution.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a href="#services" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#D4AF37] px-7 py-4 font-bold text-[#080808] transition-transform hover:-translate-y-0.5">
@@ -232,7 +232,7 @@ function App() {
             </div>
 
             <div className="grid gap-4 rounded-2xl border border-white/10 bg-white/[0.06] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.36)] backdrop-blur-sm">
-              <img src="/quality_panel.jpg" alt="Electrical panel quality work" className="h-64 w-full rounded-xl object-cover sm:h-80" />
+              <img src="/quality_panel.jpg" alt="MEP services quality work" className="h-64 w-full rounded-xl object-cover sm:h-80" />
               <div className="grid grid-cols-2 gap-3">
                 {heroSupportTiles.map((item) => (
                   <div key={item.label} className="flex min-h-24 min-w-0 flex-col items-center justify-center rounded-xl border border-[#D4AF37]/25 bg-[#D4AF37]/10 px-2 py-4 text-center sm:min-h-28 sm:px-4">
@@ -256,13 +256,13 @@ function App() {
                 Practical engineering for homes, offices and commercial projects.
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">
-                From drawings and load calculation to site execution and approval support, SMPS keeps every stage organized so customers get clear communication and reliable workmanship.
+                From MEP drawings and load calculation to site execution and approval support, SMPS keeps every stage organized so customers get clear communication and reliable workmanship.
               </p>
               <div className="mt-8 grid gap-4 sm:grid-cols-3">
                 {[
-                  ['Design', 'Drawings, SLD and calculation'],
-                  ['Install', 'Wiring, lighting, panels and plumbing'],
-                  ['Approve', 'ESCOM coordination support'],
+                  ['Design', 'MEP drawings, SLD and calculation'],
+                  ['Install', 'HVAC, wiring, lighting, plumbing and networks'],
+                  ['Approve', 'Power sanction and coordination support'],
                 ].map(([title, text]) => (
                   <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.045] p-5">
                     <CheckCircle2 className="h-6 w-6 text-[#D4AF37]" />
@@ -282,7 +282,7 @@ function App() {
               <div>
                 <p className="font-mono text-xs uppercase tracking-[0.36em] text-[#D4AF37]">Why Choose SMPS</p>
                 <h2 className="mt-4 max-w-3xl font-heading text-4xl font-black leading-tight sm:text-5xl">
-                  Rich finish, careful planning and dependable electrical support.
+                  Rich finish, careful planning and dependable MEP support.
                 </h2>
                 <p className="mt-6 max-w-2xl text-lg leading-8 text-white/66">
                   Every project is handled with a balance of technical clarity, neat execution and responsive support, from first discussion to final handover.
@@ -304,7 +304,7 @@ function App() {
 
             <div className="mt-12 grid gap-6 lg:grid-cols-[0.82fr_1.18fr]">
               <div className="overflow-hidden rounded-2xl border border-[#D4AF37]/20">
-                <img src="/capabilities_analysis.jpg" alt="Electrical planning and analysis" className="h-full min-h-[420px] w-full object-cover" loading="lazy" />
+                <img src="/capabilities_analysis.jpg" alt="MEP planning and analysis" className="h-full min-h-[420px] w-full object-cover" loading="lazy" />
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-6 lg:p-8">
                 <p className="font-mono text-xs uppercase tracking-[0.32em] text-[#D4AF37]">Our Process</p>
@@ -332,11 +332,11 @@ function App() {
               <div className="max-w-3xl">
                 <p className="font-mono text-xs uppercase tracking-[0.36em] text-[#D4AF37]">Core Services</p>
                 <h2 className="mt-4 font-heading text-4xl font-black leading-tight sm:text-5xl">
-                  Complete electrical, ELV, plumbing and approval support.
+                  Complete HVAC, electrical, plumbing, networking and approval support.
                 </h2>
               </div>
               <p className="max-w-md text-sm leading-7 text-white/56">
-                A single point of support for planning, installation, low-voltage systems, lighting, plumbing, automation, maintenance and power sanction work.
+                A single point of support for MEP planning, installation, HVAC coordination, power systems, networking, plumbing, automation, maintenance and sanction work.
               </p>
             </div>
 
@@ -372,7 +372,7 @@ function App() {
               <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="font-mono text-xs uppercase tracking-[0.32em] text-[#D4AF37]">Industries Served</p>
-                  <h3 className="mt-3 font-heading text-2xl font-bold text-white">Built for residential, commercial and industrial electrical and plumbing needs.</h3>
+                  <h3 className="mt-3 font-heading text-2xl font-bold text-white">Built for residential, commercial and industrial MEP service needs.</h3>
                 </div>
                 <div className="flex flex-wrap gap-3">
                   {industries.map((industry) => (
@@ -397,10 +397,10 @@ function App() {
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.36em] text-[#D4AF37]">Contact</p>
               <h2 className="mt-4 max-w-3xl font-heading text-4xl font-black leading-tight sm:text-5xl">
-                Ready to discuss your electrical requirement?
+                Ready to discuss your MEP requirement?
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">
-                Call, mail or message directly on WhatsApp for design, installation, ELV or ESCOM support.
+                Call, mail or message directly on WhatsApp for HVAC, electrical, plumbing, networking, ELV or approval support.
               </p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur-sm">
