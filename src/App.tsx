@@ -13,20 +13,22 @@ import {
   Sparkles,
   Sun,
   Wrench,
+  X,
 } from 'lucide-react';
 import { type FormEvent, useEffect, useState } from 'react';
 import WhatsAppButton from './sections/WhatsAppButton';
 import ResidentialSection from './sections/ResidentialSection';
 import Gallery from './components/Gallery';
+import { AboutPage, ContactPage, GalleryPage, ProjectsPage, ServicesPage } from './pages/SitePages';
 import './App.css';
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Why SMPS', href: '#why-smps' },
-  { label: 'Services', href: '#services' },
-  { label: 'Residential', href: '#residential' },
-  { label: 'Gallery', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Services', href: '/services' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const servicePillars = [
@@ -196,6 +198,23 @@ function CountUp({ value, suffix }: { value: number; suffix: string }) {
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+  const isHomePage = currentPath === '/';
+  const routePage =
+    currentPath === '/about' ? (
+      <AboutPage />
+    ) : currentPath === '/services' ? (
+      <ServicesPage />
+    ) : currentPath === '/projects' ? (
+      <ProjectsPage />
+    ) : currentPath === '/gallery' ? (
+      <GalleryPage />
+    ) : currentPath === '/contact' ? (
+      <ContactPage />
+    ) : (
+      <AboutPage />
+    );
 
   useEffect(() => {
     const timer = window.setTimeout(() => setShowIntro(false), 3200);
@@ -216,7 +235,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[#080808] text-white">
-      {showIntro && (
+      {showIntro && isHomePage && (
         <div className="intro-overlay fixed inset-0 z-[999] flex items-center justify-center overflow-hidden bg-black">
           <div className="circuit-grid" aria-hidden="true" />
           <div className="energy-trace energy-trace-horizontal" aria-hidden="true" />
@@ -232,7 +251,7 @@ function App() {
       )}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#080808]/90 backdrop-blur-md">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:h-20 lg:px-8">
-          <a href="#" className="flex items-center gap-3" aria-label="SM Power Solutions home">
+          <a href="/" className="flex items-center gap-3" aria-label="SM Power Solutions home">
             <img src="/smps-logo.png" alt="" className="h-11 w-auto shadow-[0_0_24px_rgba(255,196,0,0.22)]" />
             <span className="font-heading text-base font-black tracking-[0.14em] text-[#FFC400] sm:text-lg">
               SM POWER SOLUTIONS
@@ -241,7 +260,13 @@ function App() {
 
           <div className="hidden items-center gap-7 md:flex">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="font-mono text-xs uppercase tracking-[0.22em] text-white/60 transition-colors hover:text-[#D4AF37]">
+              <a
+                key={link.href}
+                href={link.href}
+                className={`font-mono text-xs uppercase tracking-[0.22em] transition-colors hover:text-[#D4AF37] ${
+                  currentPath === link.href ? 'text-[#D4AF37]' : 'text-white/60'
+                }`}
+              >
                 {link.label}
               </a>
             ))}
@@ -250,13 +275,41 @@ function App() {
             </a>
           </div>
 
-          <a href="#services" className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white md:hidden" aria-label="Open services">
-            <Menu className="h-5 w-5" />
-          </a>
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((value) => !value)}
+            className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white md:hidden"
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </nav>
+        <div
+          className={`md:hidden overflow-hidden border-t border-white/10 bg-[#080808]/96 transition-all duration-300 ${
+            isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="mx-auto grid max-w-7xl gap-2 px-5 py-4">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`rounded-xl px-4 py-3 font-mono text-xs uppercase tracking-[0.22em] transition-colors ${
+                  currentPath === link.href ? 'bg-[#D4AF37] text-[#080808]' : 'text-white/68 hover:bg-white/5 hover:text-[#D4AF37]'
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
       </header>
 
       <main>
+        {isHomePage ? (
+          <>
         <section id="home" className="relative isolate min-h-screen overflow-hidden pt-16 lg:pt-20">
           <img src="/hero_control_room.jpg" alt="MEP control room" className="absolute inset-0 -z-20 h-full w-full object-cover" />
           <div className="absolute inset-0 -z-10 bg-[linear-gradient(135deg,rgba(0,0,0,0.94),rgba(17,17,17,0.86),rgba(0,0,0,0.72))]" />
@@ -539,6 +592,10 @@ function App() {
             </div>
           </div>
         </section>
+          </>
+        ) : (
+          routePage
+        )}
       </main>
 
       <footer className="border-t border-white/10 bg-[#080808] px-5 py-8">
