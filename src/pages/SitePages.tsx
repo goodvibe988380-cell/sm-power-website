@@ -21,6 +21,8 @@ import {
 type LightboxImage = {
   title: string;
   category: string;
+  location?: string;
+  description?: string;
   src: string;
 };
 
@@ -207,6 +209,8 @@ function Lightbox({
         <div className="border-t border-white/10 p-5">
           <p className="font-mono text-xs uppercase tracking-[0.26em] text-[#D4AF37]">{item.category}</p>
           <h3 className="mt-2 font-heading text-xl font-bold text-white">{item.title}</h3>
+          {item.location && <p className="mt-1 text-sm font-semibold text-white/58">{item.location}</p>}
+          {item.description && <p className="mt-3 text-sm leading-6 text-white/68">{item.description}</p>}
         </div>
       </div>
     </div>
@@ -259,6 +263,7 @@ function GalleryGrid({ images }: { images: GeneratedImage[] }) {
               <div className="absolute inset-x-0 bottom-0 p-5">
                 <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#D4AF37]">{item.category}</p>
                 <h3 className="mt-2 font-heading text-lg font-bold text-white">{item.title}</h3>
+                {item.description && <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/68">{item.description}</p>}
               </div>
             </div>
           </button>
@@ -427,6 +432,8 @@ function ProjectSection({ title, images, status }: { title: string; images: Gene
                   {status}
                 </span>
                 <h3 className="mt-4 font-heading text-3xl font-black text-white">{activeImage.title}</h3>
+                {activeImage.location && <p className="mt-2 text-sm font-semibold text-white/68">{activeImage.location}</p>}
+                {activeImage.description && <p className="mt-3 max-w-2xl text-sm leading-6 text-white/72">{activeImage.description}</p>}
               </div>
             </div>
           </button>
@@ -447,6 +454,8 @@ function ProjectSection({ title, images, status }: { title: string; images: Gene
               <div className="p-5">
                 <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#D4AF37]">{item.category}</p>
                 <h3 className="mt-2 font-heading text-lg font-bold text-white">{item.title}</h3>
+                {item.location && <p className="mt-1 text-sm font-semibold text-white/50">{item.location}</p>}
+                {item.description && <p className="mt-3 line-clamp-2 text-sm leading-6 text-white/62">{item.description}</p>}
               </div>
             </button>
           ))}

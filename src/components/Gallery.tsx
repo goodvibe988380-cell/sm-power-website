@@ -7,6 +7,7 @@ import {
   X,
 } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState, type ReactNode, type TouchEvent } from 'react';
+import { completedProjectImages, type GeneratedImage } from '../data/imageManifest';
 
 type CategoryKey =
   | 'Solar'
@@ -37,12 +38,33 @@ type ProjectItem = {
   status: ProjectStatus;
   location: string;
   image: string;
+  description?: string;
   progress?: number;
 };
 
 type GalleryFilter = 'All' | CategoryKey;
 
 const fallbackImage = '/project_1.jpg';
+
+function toGalleryCategory(category: string): CategoryKey {
+  if (category === 'Solar' || category === 'Panels' || category === 'Wiring' || category === 'Maintenance' || category === 'LT/HT' || category === 'Transformer') {
+    return category;
+  }
+
+  return 'Wiring';
+}
+
+function toCompletedProject(item: GeneratedImage, index: number): ProjectItem {
+  return {
+    id: 1000 + index,
+    title: item.title,
+    category: toGalleryCategory(item.category),
+    status: 'Completed',
+    location: item.location ?? 'Completed Project',
+    image: item.src,
+    description: item.description,
+  };
+}
 
 const sharedPhotos = {
   solar: [
@@ -116,7 +138,7 @@ const categories: WorkCategory[] = [
   },
 ];
 
-const completedProjects: ProjectItem[] = [
+const legacyCompletedProjects: ProjectItem[] = [
   {
     id: 101,
     title: 'Atrium Electrical Completion',
@@ -262,6 +284,9 @@ const completedProjects: ProjectItem[] = [
     image: '/images/completed-projects/building-night-lighting.jpg',
   },
 ];
+
+const completedProjects: ProjectItem[] =
+  completedProjectImages.length > 0 ? completedProjectImages.map(toCompletedProject) : legacyCompletedProjects;
 
 const ongoingProjects: ProjectItem[] = [
   {
@@ -595,6 +620,7 @@ function ProjectCard({ project }: { project: ProjectItem }) {
             <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#D4AF37]">{project.category}</p>
             <h3 className="mt-2 font-heading text-xl font-bold text-white">{project.title}</h3>
             <p className="mt-1 text-sm text-white/62">{project.location}</p>
+            {project.description && <p className="mt-3 line-clamp-2 text-sm leading-6 text-white/68">{project.description}</p>}
           </div>
         </div>
         {project.progress != null && (
@@ -704,6 +730,8 @@ function Lightbox({
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.26em] text-[#D4AF37]">{item.category}</p>
             <h3 className="mt-2 font-heading text-xl font-bold text-white">{item.title}</h3>
+            <p className="mt-1 text-sm font-semibold text-white/58">{item.location}</p>
+            {item.description && <p className="mt-3 text-sm leading-6 text-white/68">{item.description}</p>}
           </div>
           <span className="self-start rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs uppercase tracking-[0.18em] text-white/62 sm:self-center">
             {item.status}
@@ -847,6 +875,7 @@ export default function Gallery() {
                     <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#D4AF37]">{item.category}</p>
                     <h3 className="mt-2 font-heading text-lg font-bold text-white">{item.title}</h3>
                     <p className="mt-1 text-sm text-white/58">{item.location}</p>
+                    {item.description && <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/66">{item.description}</p>}
                   </div>
                 </div>
               </button>
