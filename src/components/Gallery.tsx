@@ -593,51 +593,59 @@ function RevealCard({ children, className = '' }: { children: ReactNode; classNa
   );
 }
 
-function ProjectCard({ project }: { project: ProjectItem }) {
+function ProjectCard({ project, onOpen }: { project: ProjectItem; onOpen?: () => void }) {
   const isCompleted = project.status === 'Completed';
 
   return (
     <RevealCard>
-      <article className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] shadow-[0_20px_60px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40">
-        <div className="relative aspect-[4/3] overflow-hidden bg-[#080808]">
-          <ImageWithFallback
-            src={project.image}
-            alt={project.title}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/86 via-black/24 to-transparent" />
-          <span
-            className={`absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] ${
-              isCompleted
-                ? 'border-emerald-400/35 bg-emerald-400/14 text-emerald-300'
-                : 'border-[#D4AF37]/40 bg-[#D4AF37]/14 text-[#FFD700]'
-            }`}
-          >
-            {isCompleted ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Activity className="h-3.5 w-3.5" />}
-            {project.status}
-          </span>
-          <div className="absolute inset-x-0 bottom-0 p-5">
-            <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#D4AF37]">{project.category}</p>
-            <h3 className="mt-2 font-heading text-xl font-bold text-white">{project.title}</h3>
-            <p className="mt-1 text-sm text-white/62">{project.location}</p>
-            {project.description && <p className="mt-3 line-clamp-2 text-sm leading-6 text-white/68">{project.description}</p>}
+      <button
+        type="button"
+        onClick={onOpen}
+        className="group w-full text-left"
+      >
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] shadow-[0_20px_60px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40">
+          <div className="relative aspect-[4/3] overflow-hidden bg-[#080808]">
+            <ImageWithFallback
+              src={project.image}
+              alt={project.title}
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/86 via-black/24 to-transparent" />
+            <span
+              className={`absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] ${
+                isCompleted
+                  ? 'border-emerald-400/35 bg-emerald-400/14 text-emerald-300'
+                  : 'border-[#D4AF37]/40 bg-[#D4AF37]/14 text-[#FFD700]'
+              }`}
+            >
+              {isCompleted ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Activity className="h-3.5 w-3.5" />}
+              {project.status}
+            </span>
+            <div className="absolute inset-x-0 bottom-0 p-5">
+              <div className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-black/45 text-white backdrop-blur-sm transition-colors group-hover:border-[#D4AF37] group-hover:text-[#D4AF37]">
+                <Search className="h-4 w-4" />
+              </div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#D4AF37]">{project.category}</p>
+              <h3 className="mt-2 font-heading text-xl font-bold text-white">{project.title}</h3>
+              <p className="mt-1 line-clamp-1 text-sm text-white/58">{project.location ?? project.description}</p>
+            </div>
           </div>
+          {project.progress != null && (
+            <div className="border-t border-white/10 p-5">
+              <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-white/50">
+                <span>Progress</span>
+                <span className="text-[#D4AF37]">{project.progress}%</span>
+              </div>
+              <div className="mt-3 h-2 rounded-full bg-white/10">
+                <div
+                  className="h-2 rounded-full bg-[#D4AF37] shadow-[0_0_18px_rgba(212,175,55,0.38)] transition-all duration-700"
+                  style={{ width: `${project.progress}%` }}
+                />
+              </div>
+            </div>
+          )}
         </div>
-        {project.progress != null && (
-          <div className="border-t border-white/10 p-5">
-            <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-white/50">
-              <span>Progress</span>
-              <span className="text-[#D4AF37]">{project.progress}%</span>
-            </div>
-            <div className="mt-3 h-2 rounded-full bg-white/10">
-              <div
-                className="h-2 rounded-full bg-[#D4AF37] shadow-[0_0_18px_rgba(212,175,55,0.38)] transition-all duration-700"
-                style={{ width: `${project.progress}%` }}
-              />
-            </div>
-          </div>
-        )}
-      </article>
+      </button>
     </RevealCard>
   );
 }
@@ -653,10 +661,15 @@ function Lightbox({
   onNext: () => void;
   onPrevious: () => void;
 }) {
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
     if (!item) {
+      setIsVisible(false);
       return undefined;
     }
+
+    setIsVisible(true);
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -685,7 +698,9 @@ function Lightbox({
 
   return (
     <div
-      className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/92 px-4 py-6 backdrop-blur-sm"
+      className={`fixed inset-0 z-[1000] flex items-center justify-center bg-black/92 px-4 py-6 backdrop-blur-sm transition-all duration-300 ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      }`}
       role="dialog"
       aria-modal="true"
       aria-label={`${item.title} project photo`}
@@ -722,7 +737,11 @@ function Lightbox({
         {'>'}
       </button>
 
-      <div className="w-full max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-[#080808]" onClick={(event) => event.stopPropagation()}>
+      <div
+        className="w-full max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-[#080808] shadow-[0_0_80px_rgba(0,0,0,0.35)] transition-transform duration-300 ease-out"
+        onClick={(event) => event.stopPropagation()}
+        style={{ transform: isVisible ? 'scale(1)' : 'scale(0.96)' }}
+      >
         <div className="relative max-h-[76vh] bg-black">
           <ImageWithFallback src={item.image} alt={item.title} eager className="mx-auto max-h-[76vh] w-full object-contain" />
         </div>
@@ -744,6 +763,7 @@ function Lightbox({
 
 export default function Gallery() {
   const [filter, setFilter] = useState<GalleryFilter>('All');
+  const [lightboxList, setLightboxList] = useState<ProjectItem[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const filteredGallery = useMemo(
@@ -751,23 +771,28 @@ export default function Gallery() {
     [filter]
   );
 
-  const selectedItem = lightboxIndex == null ? null : filteredGallery[lightboxIndex] ?? null;
+  const selectedItem = lightboxIndex == null ? null : lightboxList[lightboxIndex] ?? null;
+
+  const openLightbox = (items: ProjectItem[], index: number) => {
+    setLightboxList(items);
+    setLightboxIndex(index);
+  };
 
   const showNext = () => {
     setLightboxIndex((value) => {
-      if (value == null || filteredGallery.length === 0) {
+      if (value == null || lightboxList.length === 0) {
         return value;
       }
-      return (value + 1) % filteredGallery.length;
+      return (value + 1) % lightboxList.length;
     });
   };
 
   const showPrevious = () => {
     setLightboxIndex((value) => {
-      if (value == null || filteredGallery.length === 0) {
+      if (value == null || lightboxList.length === 0) {
         return value;
       }
-      return (value - 1 + filteredGallery.length) % filteredGallery.length;
+      return (value - 1 + lightboxList.length) % lightboxList.length;
     });
   };
 
@@ -803,8 +828,8 @@ export default function Gallery() {
             </span>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {completedProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+            {completedProjects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} onOpen={() => openLightbox(completedProjects, index)} />
             ))}
           </div>
         </div>
@@ -820,8 +845,8 @@ export default function Gallery() {
             </span>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {ongoingProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+            {ongoingProjects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} onOpen={() => openLightbox(ongoingProjects, index)} />
             ))}
           </div>
         </div>
@@ -858,7 +883,7 @@ export default function Gallery() {
               <button
                 key={item.id}
                 type="button"
-                onClick={() => setLightboxIndex(index)}
+                onClick={() => openLightbox(filteredGallery, index)}
                 className="group mb-5 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] text-left shadow-[0_20px_58px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40"
               >
                 <div className={`relative overflow-hidden bg-[#080808] ${index % 3 === 0 ? 'aspect-[4/5]' : 'aspect-[4/3]'}`}>
@@ -874,8 +899,7 @@ export default function Gallery() {
                   <div className="absolute inset-x-0 bottom-0 p-5">
                     <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#D4AF37]">{item.category}</p>
                     <h3 className="mt-2 font-heading text-lg font-bold text-white">{item.title}</h3>
-                    <p className="mt-1 text-sm text-white/58">{item.location}</p>
-                    {item.description && <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/66">{item.description}</p>}
+                    <p className="mt-1 line-clamp-1 text-sm text-white/58">{item.location ?? item.description}</p>
                   </div>
                 </div>
               </button>

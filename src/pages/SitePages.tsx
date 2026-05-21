@@ -66,7 +66,7 @@ const serviceCards = [
 ];
 
 const aboutCounters = [
-  { value: 500, suffix: '+', label: 'Projects handled' },
+  { value: 180, suffix: '+', label: 'Projects handled' },
   { value: 10, suffix: '+', label: 'Expert team members' },
   { value: 24, suffix: '/7', label: 'Support mindset' },
   { value: 100, suffix: '%', label: 'Customer focus' },

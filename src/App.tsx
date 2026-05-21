@@ -19,6 +19,7 @@ import { type FormEvent, useEffect, useState } from 'react';
 import WhatsAppButton from './sections/WhatsAppButton';
 import ResidentialSection from './sections/ResidentialSection';
 import Gallery from './components/Gallery';
+import ClientReviewSection from './sections/ClientReviewSection';
 import { AboutPage, ContactPage, GalleryPage, ProjectsPage, ServicesPage } from './pages/SitePages';
 import './App.css';
 
@@ -114,7 +115,7 @@ const detailedServices = [
 ];
 
 const trustStats = [
-  { value: '500+', label: 'Projects' },
+  { value: '180+', label: 'Projects' },
   { value: '24/7', label: 'Fast installation support' },
   { value: '100%', label: 'Customer-focused pricing' },
 ];
@@ -538,6 +539,8 @@ function App() {
         <ResidentialSection />
 
         <Gallery />
+
+        <ClientReviewSection />
 
         <section id="contact" className="relative overflow-hidden bg-[#111111] py-20 lg:py-28">
           <img src="/contact_office.jpg" alt="SM Power Solutions contact office" className="absolute inset-0 h-full w-full object-cover opacity-18" />
