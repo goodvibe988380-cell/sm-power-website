@@ -98,6 +98,19 @@ const detailedServices = [
     title: 'ESCOM Office Works',
     items: ['Temporary power sanction', 'Permanent power sanction', 'Load enhancement / reduction', 'HT power sanction', 'Name changing', 'Meter replacement'],
   },
+  {
+    title: 'HVAC',
+    items: [
+      'Air Conditioning System',
+      'Design of Air Conditioning',
+      'Ventilation Systems',
+      'Duct Accessories',
+      'Duct Design',
+      'HVAC Controls',
+      'Chilled Water Systems',
+      'Chilled Water Piping System',
+    ],
+  },
 ];
 
 const trustStats = [
@@ -107,7 +120,7 @@ const trustStats = [
 ];
 
 const whyCounters = [
-  { value: 500, suffix: '+', label: 'Projects' },
+  { value: 180, suffix: '+', label: 'Projects' },
   { value: 24, suffix: '/7', label: 'Fast Installation' },
   { value: 100, suffix: '%', label: 'Affordable Pricing' },
   { value: 10, suffix: '+', label: 'Expert Team' },
@@ -320,7 +333,7 @@ function App() {
             <div className="mx-auto max-w-5xl">
               <img src="/smps-logo.png" alt="SM Power Solutions logo" className="mx-auto h-28 w-auto drop-shadow-[0_0_34px_rgba(255,215,0,0.28)] sm:h-36" />
               <h1 className="mt-8 font-heading text-4xl font-black uppercase leading-[0.95] tracking-[0.08em] text-white sm:text-6xl lg:text-7xl">
-                SM <span className="text-[#FFD700]">POWER</span> SOLUTIONS
+                SM <span className="text-white">POWER</span> SOLUTIONS
               </h1>
               <p className="mx-auto mt-5 max-w-3xl font-heading text-xl font-semibold text-[#FFD700] sm:text-2xl">
                 Power Rules the World. We Rule Power.
@@ -472,7 +485,18 @@ function App() {
                     <service.icon className="h-6 w-6" />
                   </div>
                   <h3 className="mt-5 font-heading text-xl font-bold">{service.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-white/60">{service.description}</p>
+                  {Array.isArray(service.description) ? (
+                    <ul className="mt-4 space-y-3 text-sm leading-7 text-white/60">
+                      {service.description.map((item) => (
+                        <li key={item} className="flex gap-3">
+                          <span className="mt-1 h-2 w-2 rounded-full bg-[#D4AF37]" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="mt-3 text-sm leading-7 text-white/60">{service.description}</p>
+                  )}
                 </article>
               ))}
             </div>

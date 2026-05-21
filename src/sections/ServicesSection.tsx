@@ -17,6 +17,22 @@ const services = [
     description: 'HVAC, ventilation, and climate control solutions.',
   },
   {
+    icon: Cog,
+    title: 'HVAC',
+    description: (
+      <ul className="text-xs text-white/60 leading-relaxed list-disc ml-4">
+        <li>Air Conditioning system</li>
+        <li>Design of Air Conditioning</li>
+        <li>Ventilation Systems</li>
+        <li>Duct Accessories</li>
+        <li>Duct Design</li>
+        <li>HVAC Controls</li>
+        <li>Chilled water Systems</li>
+        <li>Chilled water piping system</li>
+      </ul>
+    ),
+  },
+  {
     icon: Droplets,
     title: 'Plumbing Solutions',
     description: 'Water supply, drainage, and sanitary systems design.',
@@ -243,9 +259,15 @@ export default function ServicesSection() {
                     <h3 className="font-heading font-semibold text-white text-sm mb-1">
                       {service.title}
                     </h3>
-                    <p className="text-xs text-white/60 leading-relaxed">
-                      {service.description}
-                    </p>
+                    {typeof service.description === 'string' ? (
+                      <p className="text-xs text-white/60 leading-relaxed">
+                        {service.description}
+                      </p>
+                    ) : (
+                      <div className="text-xs text-white/60 leading-relaxed">
+                        {service.description}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
