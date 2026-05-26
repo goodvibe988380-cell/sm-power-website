@@ -45,34 +45,34 @@ const fallbackImage = '/project_1.jpg';
 
 const sharedPhotos = {
   solar: [
+    { src: '/images/customer-reference/rooftop-solar-reference.png', alt: 'Rooftop solar reference work' },
+    { src: '/images/customer-reference/solar-panel-maintenance-reference.png', alt: 'Solar panel maintenance reference' },
     { src: '/project_2.jpg', alt: 'Commercial solar installation by SM Power Solutions' },
-    { src: '/services_mechanical.jpg', alt: 'MEP roof service planning for solar project' },
-    { src: '/industries_ceiling.jpg', alt: 'Industrial service area prepared for power work' },
   ],
   panels: [
-    { src: '/quality_panel.jpg', alt: 'Electrical panel quality inspection' },
-    { src: '/project_3.jpg', alt: 'Electrical panel work at commercial site' },
-    { src: '/capabilities_analysis.jpg', alt: 'Power system design and panel planning' },
+    { src: '/images/customer-reference/panel-wiring-reference.png', alt: 'Panel wiring reference' },
+    { src: '/images/customer-reference/meter-panel-reference.png', alt: 'Meter panel reference' },
+    { src: '/images/customer-reference/electrical-panel-inspection-reference.jpg', alt: 'Electrical panel inspection reference' },
   ],
   wiring: [
     { src: '/electrical_services.jpg', alt: 'Electrical wiring installation project' },
-    { src: '/project_1.jpg', alt: 'Commercial electrical work in progress' },
-    { src: '/images/apartment_complex.jpg', alt: 'Apartment electrical wiring project' },
+    { src: '/images/customer-reference/residential-wiring-reference.png', alt: 'Residential wiring reference' },
+    { src: '/projects/completed/office-linear-workstation-lighting.jpg', alt: 'Office linear workstation lighting completion' },
   ],
   maintenance: [
     { src: '/lifecycle_site.jpg', alt: 'Electrical maintenance work at customer site' },
-    { src: '/elv_services.jpg', alt: 'ELV maintenance and network service work' },
-    { src: '/images/plumbing_3.jpg', alt: 'Site service and maintenance support' },
+    { src: '/images/customer-reference/sink-plumbing-repair.jpg', alt: 'Sink plumbing repair reference' },
+    { src: '/images/customer-reference/copper-plumbing-layout.jpg', alt: 'Copper plumbing maintenance layout reference' },
   ],
   ltHt: [
     { src: '/escom_office.jpg', alt: 'LT and HT electrical approval support' },
     { src: '/design_consultation.jpg', alt: 'Electrical load planning and consultation' },
-    { src: '/project_3.jpg', alt: 'HT electrical panel and power work' },
+    { src: '/capabilities_analysis.jpg', alt: 'Power sanction and load planning support' },
   ],
   transformer: [
-    { src: '/project_1.jpg', alt: 'Transformer service site work' },
-    { src: '/quality_panel.jpg', alt: 'Transformer and panel inspection' },
-    { src: '/capabilities_analysis.jpg', alt: 'Transformer service planning and testing' },
+    { src: '/projects/completed/transformer-yard-installation.jpg', alt: 'Transformer yard installation' },
+    { src: '/projects/completed/transformer-lifting-site.jpg', alt: 'Transformer lifting site work' },
+    { src: '/projects/completed/panel-delivery-site.jpg', alt: 'Panel delivery at power site' },
   ],
 };
 
@@ -122,7 +122,7 @@ const ongoingProjects: ProjectItem[] = [
     category: 'Wiring',
     status: 'Ongoing',
     location: 'Shimoga',
-    image: '/project_1.jpg',
+    image: '/projects/ongoing/vasavi-school-electrical-work.jpg',
     progress: 84,
   },
   {
@@ -131,7 +131,7 @@ const ongoingProjects: ProjectItem[] = [
     category: 'LT/HT',
     status: 'Ongoing',
     location: 'Customer Office',
-    image: '/escom_office.jpg',
+    image: '/projects/ongoing/lt-ht-approval-support.jpg',
     progress: 68,
   },
   {
@@ -140,7 +140,7 @@ const ongoingProjects: ProjectItem[] = [
     category: 'Maintenance',
     status: 'Ongoing',
     location: 'Commercial Facility',
-    image: '/lifecycle_site.jpg',
+    image: '/projects/ongoing/preventive-amc-visit.jpg',
     progress: 52,
   },
 ];

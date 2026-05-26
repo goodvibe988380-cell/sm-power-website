@@ -8,12 +8,8 @@ import {
   ShieldCheck,
   X,
 } from 'lucide-react';
-import { type FormEvent, useEffect, useMemo, useState } from 'react';
+import { type FormEvent, useEffect, useState } from 'react';
 import ProjectGalleryCards from '../components/ProjectGalleryCards';
-import {
-  ongoingProjectImages,
-  type GeneratedImage,
-} from '../data/imageManifest';
 import { completedProjectGalleries, getCompletedProjectGallery } from '../data/projectGalleries';
 
 type LightboxImage = {
@@ -69,24 +65,6 @@ const aboutCounters = [
   { value: 24, suffix: '/7', label: 'Support mindset' },
   { value: 100, suffix: '%', label: 'Customer focus' },
 ];
-
-function useAutoIndex(length: number, delay = 3600) {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (length <= 1) {
-      return undefined;
-    }
-
-    const timer = window.setInterval(() => {
-      setIndex((value) => (value + 1) % length);
-    }, delay);
-
-    return () => window.clearInterval(timer);
-  }, [delay, length]);
-
-  return [index, setIndex] as const;
-}
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const [count, setCount] = useState(0);
@@ -251,10 +229,6 @@ function Lightbox({
   );
 }
 
-function filterImages(images: GeneratedImage[], filter: string) {
-  return images.filter((item) => filter === 'All' || item.category === filter);
-}
-
 export function AboutPage() {
   return (
     <>
@@ -373,90 +347,6 @@ function CompletedProjectsOverview() {
   );
 }
 
-function ProjectSection({ title, images, status }: { title: string; images: GeneratedImage[]; status: 'Completed' | 'Ongoing' }) {
-  const [filter, setFilter] = useState('All');
-  const [selected, setSelected] = useState<LightboxImage | null>(null);
-  const visibleImages = useMemo(() => filterImages(images, filter), [filter, images]);
-  const categories = useMemo(() => ['All', ...Array.from(new Set(images.map((item) => item.category)))], [images]);
-  const [activeIndex, setActiveIndex] = useAutoIndex(visibleImages.length);
-  const activeImage = visibleImages[activeIndex % Math.max(visibleImages.length, 1)];
-
-  useEffect(() => {
-    setActiveIndex(0);
-  }, [filter, setActiveIndex]);
-
-  return (
-    <section className="bg-[#080808] py-16">
-      <div className="mx-auto max-w-7xl px-5 lg:px-8">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[0.34em] text-[#D4AF37]">{status} Projects</p>
-            <h2 className="mt-3 font-heading text-3xl font-black text-white sm:text-4xl">{title}</h2>
-          </div>
-          <div className="flex max-w-full gap-2 overflow-x-auto pb-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                type="button"
-                onClick={() => setFilter(category)}
-                className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-300 ${
-                  filter === category
-                    ? 'border-[#D4AF37] bg-[#D4AF37] text-[#080808]'
-                    : 'border-white/10 bg-white/5 text-white/62 hover:border-[#D4AF37]/45 hover:text-white'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {activeImage && (
-          <button
-            type="button"
-            onClick={() => setSelected(activeImage)}
-            className="group mt-8 block w-full overflow-hidden rounded-2xl border border-[#D4AF37]/20 bg-white/[0.045] text-left shadow-[0_24px_80px_rgba(0,0,0,0.28)]"
-          >
-            <div className="relative aspect-[16/8] min-h-[320px] overflow-hidden">
-              <ImageWithFallback src={activeImage.src} alt={activeImage.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-            </div>
-            <div className="p-6 sm:p-8">
-              <span className="inline-flex rounded-full border border-[#D4AF37]/35 bg-[#D4AF37]/12 px-3 py-1.5 text-xs uppercase tracking-[0.2em] text-[#FFD700]">
-                {status}
-              </span>
-              <h3 className="mt-4 font-heading text-3xl font-black text-white">{activeImage.title}</h3>
-              {activeImage.location && <p className="mt-2 text-sm font-semibold text-white/68">{activeImage.location}</p>}
-              {activeImage.description && <p className="mt-3 max-w-2xl text-sm leading-6 text-white/72">{activeImage.description}</p>}
-            </div>
-          </button>
-        )}
-
-        <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {visibleImages.map((item) => (
-            <button
-              key={item.src}
-              type="button"
-              onClick={() => setSelected(item)}
-              className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] text-left transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <ImageWithFallback src={item.src} alt={item.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              </div>
-              <div className="p-5">
-                <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#D4AF37]">{item.category}</p>
-                <h3 className="mt-2 font-heading text-lg font-bold text-white">{item.title}</h3>
-                {item.location && <p className="mt-1 text-sm font-semibold text-white/50">{item.location}</p>}
-                {item.description && <p className="mt-3 line-clamp-2 text-sm leading-6 text-white/62">{item.description}</p>}
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-      <Lightbox item={selected} onClose={() => setSelected(null)} />
-    </section>
-  );
-}
-
 export function ProjectGalleryPage({ slug }: { slug: string }) {
   const project = getCompletedProjectGallery(slug);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -564,12 +454,11 @@ export function ProjectsPage() {
     <>
       <PageHero
         eyebrow="Projects"
-        title="Completed and ongoing work with real project visuals."
+        title="Completed work with real project visuals."
         text="Browse completed work by project, then open a dedicated gallery page for the related photos."
         image="/project_1.jpg"
       />
       <CompletedProjectsOverview />
-      <ProjectSection title="Active project work and live execution references." images={ongoingProjectImages} status="Ongoing" />
     </>
   );
 }
