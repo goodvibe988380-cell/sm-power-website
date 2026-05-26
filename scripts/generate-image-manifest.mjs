@@ -217,6 +217,10 @@ const imageMetadata = {
     location: 'Sun Hospital',
     description: 'Hospital entry facade lighting completed with signage visibility and clean exterior illumination.',
   },
+  'vasavi-school-electrical-work.jpg': {
+    title: 'Commercial Office Electrical Work',
+    category: 'Wiring',
+  },
 };
 
 function titleFromFile(fileName) {

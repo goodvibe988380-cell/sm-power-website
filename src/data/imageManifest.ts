@@ -361,7 +361,7 @@ export const ongoingProjectImages: GeneratedImage[] = [
     "src": "/projects/ongoing/preventive-amc-visit.jpg"
   },
   {
-    "title": "Vasavi School Electrical Work",
+    "title": "Commercial Office Electrical Work",
     "category": "Wiring",
     "src": "/projects/ongoing/vasavi-school-electrical-work.jpg"
   }

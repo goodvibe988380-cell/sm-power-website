@@ -20,7 +20,7 @@ import WhatsAppButton from './sections/WhatsAppButton';
 import ResidentialSection from './sections/ResidentialSection';
 import Gallery from './components/Gallery';
 import ClientReviewSection from './sections/ClientReviewSection';
-import { AboutPage, ContactPage, GalleryPage, ProjectsPage, ServicesPage } from './pages/SitePages';
+import { AboutPage, ContactPage, GalleryPage, ProjectGalleryPage, ProjectsPage, ServicesPage } from './pages/SitePages';
 import './App.css';
 
 const navLinks = [
@@ -215,11 +215,14 @@ function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
   const isHomePage = currentPath === '/';
+  const projectGalleryMatch = currentPath.match(/^\/projects\/([^/]+)$/);
   const routePage =
     currentPath === '/about' ? (
       <AboutPage />
     ) : currentPath === '/services' ? (
       <ServicesPage />
+    ) : projectGalleryMatch ? (
+      <ProjectGalleryPage slug={projectGalleryMatch[1]} />
     ) : currentPath === '/projects' ? (
       <ProjectsPage />
     ) : currentPath === '/gallery' ? (

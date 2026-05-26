@@ -1,22 +1,20 @@
 import {
-  Activity,
   ArrowRight,
   CheckCircle2,
   Clock,
   Mail,
   MapPin,
   Phone,
-  Search,
   ShieldCheck,
   X,
 } from 'lucide-react';
 import { type FormEvent, useEffect, useMemo, useState } from 'react';
+import ProjectGalleryCards from '../components/ProjectGalleryCards';
 import {
-  completedProjectImages,
-  galleryImages,
   ongoingProjectImages,
   type GeneratedImage,
 } from '../data/imageManifest';
+import { completedProjectGalleries, getCompletedProjectGallery } from '../data/projectGalleries';
 
 type LightboxImage = {
   title: string;
@@ -161,9 +159,13 @@ function ImageWithFallback({ src, alt, className }: { src: string; alt: string; 
 function Lightbox({
   item,
   onClose,
+  onNext,
+  onPrevious,
 }: {
   item: LightboxImage | null;
   onClose: () => void;
+  onNext?: () => void;
+  onPrevious?: () => void;
 }) {
   useEffect(() => {
     if (!item) {
@@ -174,6 +176,12 @@ function Lightbox({
       if (event.key === 'Escape') {
         onClose();
       }
+      if (event.key === 'ArrowRight') {
+        onNext?.();
+      }
+      if (event.key === 'ArrowLeft') {
+        onPrevious?.();
+      }
     };
 
     document.body.style.overflow = 'hidden';
@@ -183,7 +191,7 @@ function Lightbox({
       document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [item, onClose]);
+  }, [item, onClose, onNext, onPrevious]);
 
   if (!item) {
     return null;
@@ -204,6 +212,32 @@ function Lightbox({
       >
         <X className="h-5 w-5" />
       </button>
+      {onPrevious && (
+        <button
+          type="button"
+          aria-label="Previous project photo"
+          onClick={(event) => {
+            event.stopPropagation();
+            onPrevious();
+          }}
+          className="absolute left-4 top-1/2 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-white/10 text-2xl text-white transition-colors hover:border-[#D4AF37] hover:text-[#D4AF37] sm:grid"
+        >
+          {'<'}
+        </button>
+      )}
+      {onNext && (
+        <button
+          type="button"
+          aria-label="Next project photo"
+          onClick={(event) => {
+            event.stopPropagation();
+            onNext();
+          }}
+          className="absolute right-4 top-1/2 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-white/10 text-2xl text-white transition-colors hover:border-[#D4AF37] hover:text-[#D4AF37] sm:grid"
+        >
+          {'>'}
+        </button>
+      )}
       <div className="w-full max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-[#080808]" onClick={(event) => event.stopPropagation()}>
         <ImageWithFallback src={item.src} alt={item.title} className="max-h-[76vh] w-full object-contain" />
         <div className="border-t border-white/10 p-5">
@@ -219,66 +253,6 @@ function Lightbox({
 
 function filterImages(images: GeneratedImage[], filter: string) {
   return images.filter((item) => filter === 'All' || item.category === filter);
-}
-
-function GalleryGrid({ images }: { images: GeneratedImage[] }) {
-  const [filter, setFilter] = useState('All');
-  const [selected, setSelected] = useState<LightboxImage | null>(null);
-  const categories = useMemo(() => ['All', ...Array.from(new Set(images.map((item) => item.category)))], [images]);
-  const visibleImages = useMemo(() => filterImages(images, filter), [filter, images]);
-
-  return (
-    <>
-      <div className="flex max-w-full gap-2 overflow-x-auto pb-2">
-        {categories.map((category) => (
-          <button
-            key={category}
-            type="button"
-            onClick={() => setFilter(category)}
-            className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-300 ${
-              filter === category
-                ? 'border-[#D4AF37] bg-[#D4AF37] text-[#080808]'
-                : 'border-white/10 bg-white/5 text-white/62 hover:border-[#D4AF37]/45 hover:text-white'
-            }`}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-
-      <div className="mt-8 columns-1 gap-5 sm:columns-2 lg:columns-3">
-        {visibleImages.map((item, index) => (
-          <button
-            key={item.src}
-            type="button"
-            onClick={() => setSelected(item)}
-            className="group mb-5 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] text-left shadow-[0_20px_58px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40"
-          >
-            <div className={`relative overflow-hidden bg-[#080808] ${index % 3 === 0 ? 'aspect-[4/5]' : 'aspect-[4/3]'}`}>
-              <ImageWithFallback src={item.src} alt={item.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-black/12 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
-              <span className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-black/45 text-white backdrop-blur-sm transition-colors group-hover:border-[#D4AF37] group-hover:text-[#D4AF37]">
-                <Search className="h-4 w-4" />
-              </span>
-              <div className="absolute inset-x-0 bottom-0 p-5">
-                <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#D4AF37]">{item.category}</p>
-                <h3 className="mt-2 font-heading text-lg font-bold text-white">{item.title}</h3>
-                {item.description && <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/68">{item.description}</p>}
-              </div>
-            </div>
-          </button>
-        ))}
-      </div>
-
-      {visibleImages.length === 0 && (
-        <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.045] p-10 text-center text-white/58">
-          Drop images into the matching public folder and run the site again to refresh this gallery.
-        </div>
-      )}
-
-      <Lightbox item={selected} onClose={() => setSelected(null)} />
-    </>
-  );
 }
 
 export function AboutPage() {
@@ -359,12 +333,9 @@ export function ServicesPage() {
             <article key={service.title} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/45 hover:shadow-[0_24px_80px_rgba(212,175,55,0.12)]">
               <div className="relative aspect-[4/3] overflow-hidden bg-[#080808]">
                 <ImageWithFallback src={service.image} alt={service.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/24 to-transparent" />
-                <p className="absolute left-5 top-5 rounded-full border border-[#D4AF37]/30 bg-black/50 px-3 py-1 text-xs uppercase tracking-[0.2em] text-[#D4AF37]">
-                  {service.category}
-                </p>
               </div>
               <div className="p-6">
+                <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#D4AF37]">{service.category}</p>
                 <h2 className="font-heading text-2xl font-black text-white">{service.title}</h2>
                 <p className="mt-3 min-h-[4.5rem] text-sm leading-7 text-white/62">{service.description}</p>
                 <a href="/contact" className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#D4AF37] px-5 py-2.5 text-sm font-bold text-[#080808] transition-transform hover:-translate-y-0.5">
@@ -376,6 +347,29 @@ export function ServicesPage() {
         </div>
       </section>
     </>
+  );
+}
+
+function CompletedProjectsOverview() {
+  return (
+    <section className="bg-[#080808] py-16">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.34em] text-[#D4AF37]">Completed Projects</p>
+            <h2 className="mt-3 font-heading text-3xl font-black text-white sm:text-4xl">
+              Project-wise galleries for completed work.
+            </h2>
+          </div>
+          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">
+            <CheckCircle2 className="h-4 w-4" /> View by Project
+          </span>
+        </div>
+        <div className="mt-8">
+          <ProjectGalleryCards projects={completedProjectGalleries} />
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -425,16 +419,14 @@ function ProjectSection({ title, images, status }: { title: string; images: Gene
           >
             <div className="relative aspect-[16/8] min-h-[320px] overflow-hidden">
               <ImageWithFallback src={activeImage.src} alt={activeImage.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/28 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/35 bg-[#D4AF37]/12 px-3 py-1.5 text-xs uppercase tracking-[0.2em] text-[#FFD700]">
-                  {status === 'Completed' ? <CheckCircle2 className="h-4 w-4" /> : <Activity className="h-4 w-4" />}
-                  {status}
-                </span>
-                <h3 className="mt-4 font-heading text-3xl font-black text-white">{activeImage.title}</h3>
-                {activeImage.location && <p className="mt-2 text-sm font-semibold text-white/68">{activeImage.location}</p>}
-                {activeImage.description && <p className="mt-3 max-w-2xl text-sm leading-6 text-white/72">{activeImage.description}</p>}
-              </div>
+            </div>
+            <div className="p-6 sm:p-8">
+              <span className="inline-flex rounded-full border border-[#D4AF37]/35 bg-[#D4AF37]/12 px-3 py-1.5 text-xs uppercase tracking-[0.2em] text-[#FFD700]">
+                {status}
+              </span>
+              <h3 className="mt-4 font-heading text-3xl font-black text-white">{activeImage.title}</h3>
+              {activeImage.location && <p className="mt-2 text-sm font-semibold text-white/68">{activeImage.location}</p>}
+              {activeImage.description && <p className="mt-3 max-w-2xl text-sm leading-6 text-white/72">{activeImage.description}</p>}
             </div>
           </button>
         )}
@@ -449,7 +441,6 @@ function ProjectSection({ title, images, status }: { title: string; images: Gene
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <ImageWithFallback src={item.src} alt={item.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/84 via-transparent to-transparent" />
               </div>
               <div className="p-5">
                 <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#D4AF37]">{item.category}</p>
@@ -466,16 +457,118 @@ function ProjectSection({ title, images, status }: { title: string; images: Gene
   );
 }
 
+export function ProjectGalleryPage({ slug }: { slug: string }) {
+  const project = getCompletedProjectGallery(slug);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const selected = selectedIndex == null ? null : project?.photos[selectedIndex] ?? null;
+
+  const showNext = () => {
+    if (!project) {
+      return;
+    }
+
+    setSelectedIndex((value) => {
+      if (value == null) {
+        return value;
+      }
+      return (value + 1) % project.photos.length;
+    });
+  };
+
+  const showPrevious = () => {
+    if (!project) {
+      return;
+    }
+
+    setSelectedIndex((value) => {
+      if (value == null) {
+        return value;
+      }
+      return (value - 1 + project.photos.length) % project.photos.length;
+    });
+  };
+
+  if (!project) {
+    return (
+      <>
+        <PageHero
+          eyebrow="Project Gallery"
+          title="Project gallery not found."
+          text="The requested project gallery is unavailable. Browse the completed project cards to open an available gallery."
+          image="/project_1.jpg"
+        />
+        <section className="bg-[#080808] py-16">
+          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+            <a href="/projects" className="inline-flex items-center gap-2 rounded-full bg-[#D4AF37] px-5 py-2.5 text-sm font-bold text-[#080808] transition-transform hover:-translate-y-0.5">
+              Back to Projects <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </section>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <PageHero
+        eyebrow={project.category}
+        title={project.title}
+        text={project.summary}
+        image={project.coverImage}
+      />
+      <section className="bg-[#080808] py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-5 lg:px-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <a href="/projects" className="inline-flex items-center gap-2 text-sm font-bold text-[#D4AF37] transition-colors hover:text-[#FFD700]">
+                Back to Projects
+              </a>
+              <h2 className="mt-4 font-heading text-3xl font-black text-white sm:text-4xl">
+                Project photo gallery.
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-white/58">{project.location}</p>
+            </div>
+            <span className="inline-flex w-fit rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#FFD700]">
+              {project.photos.length} Photos
+            </span>
+          </div>
+
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {project.photos.map((item, index) => (
+              <button
+                key={item.src}
+                type="button"
+                onClick={() => setSelectedIndex(index)}
+                className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] text-left shadow-[0_20px_58px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#080808]">
+                  <ImageWithFallback src={item.src} alt={item.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                </div>
+                <div className="p-5">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#D4AF37]">{item.category}</p>
+                  <h3 className="mt-2 font-heading text-lg font-bold text-white">{item.title}</h3>
+                  {item.description && <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/68">{item.description}</p>}
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+      <Lightbox item={selected} onClose={() => setSelectedIndex(null)} onNext={showNext} onPrevious={showPrevious} />
+    </>
+  );
+}
+
 export function ProjectsPage() {
   return (
     <>
       <PageHero
         eyebrow="Projects"
         title="Completed and ongoing work with real project visuals."
-        text="Browse project photos loaded from the public project folders with filters, sliders and fullscreen preview."
+        text="Browse completed work by project, then open a dedicated gallery page for the related photos."
         image="/project_1.jpg"
       />
-      <ProjectSection title="Delivered projects ready for customer reference." images={completedProjectImages} status="Completed" />
+      <CompletedProjectsOverview />
       <ProjectSection title="Active project work and live execution references." images={ongoingProjectImages} status="Ongoing" />
     </>
   );
@@ -486,13 +579,13 @@ export function GalleryPage() {
     <>
       <PageHero
         eyebrow="Gallery"
-        title="Project and customer-reference photo archive."
-        text="A responsive gallery system that automatically reads uploaded photos from the public gallery folder."
+        title="Completed projects organized by project."
+        text="Open a project card to view its related photos on a dedicated, mobile-friendly gallery page."
         image="/hero_control_room.jpg"
       />
       <section className="bg-[#080808] py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <GalleryGrid images={galleryImages} />
+          <ProjectGalleryCards projects={completedProjectGalleries} />
         </div>
       </section>
     </>

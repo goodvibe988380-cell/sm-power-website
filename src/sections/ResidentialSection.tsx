@@ -1,26 +1,20 @@
-import { Home, Building2, Lamp, Zap } from 'lucide-react'
-
 const residentialServices = [
   {
-    icon: Home,
     title: 'Villa & Bungalow',
     body: 'Complete electrical setup for luxury villas and independent houses.',
     image: '/images/residential_villa.jpg',
   },
   {
-    icon: Building2,
     title: 'Apartments & Flats',
     body: 'ELV systems, lighting, and power distribution for residential complexes.',
     image: '/images/apartment_complex.jpg',
   },
   {
-    icon: Lamp,
     title: 'Interior Lighting',
     body: 'Designer lighting solutions for living rooms, bedrooms, and kitchens.',
     image: '/images/interior_lighting.jpg',
   },
   {
-    icon: Zap,
     title: 'Smart Home Setup',
     body: 'Home automation, smart lighting, and modern electrical solutions.',
     image: '/images/smart_home.jpg',
@@ -41,7 +35,6 @@ export default function ResidentialSection() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {residentialServices.map((service) => {
-            const Icon = service.icon
             return (
               <article key={service.title} className="group overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40">
                 <div className="relative h-48 overflow-hidden">
@@ -50,12 +43,6 @@ export default function ResidentialSection() {
                     alt={service.title}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#D4AF37]/20 text-[#D4AF37]">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                  </div>
                 </div>
                 <div className="p-5">
                   <h3 className="text-lg font-semibold text-white">{service.title}</h3>
