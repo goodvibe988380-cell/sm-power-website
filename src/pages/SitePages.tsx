@@ -10,6 +10,11 @@ import {
 } from 'lucide-react';
 import { type FormEvent, useEffect, useState } from 'react';
 import ProjectGalleryCards from '../components/ProjectGalleryCards';
+import {
+  completedProjectImages,
+  ongoingProjectImages,
+  type GeneratedImage,
+} from '../data/imageManifest';
 import { completedProjectGalleries, getCompletedProjectGallery } from '../data/projectGalleries';
 
 type LightboxImage = {
@@ -19,6 +24,8 @@ type LightboxImage = {
   description?: string;
   src: string;
 };
+
+type GalleryPhoto = GeneratedImage;
 
 const serviceCards = [
   {
@@ -463,18 +470,99 @@ export function ProjectsPage() {
   );
 }
 
+function stablePhotoScore(src: string) {
+  let score = 0;
+
+  for (let index = 0; index < src.length; index += 1) {
+    score = (score * 31 + src.charCodeAt(index)) % 9973;
+  }
+
+  return score;
+}
+
+function getAllGalleryPhotos(): GalleryPhoto[] {
+  const bySource = new Map<string, GalleryPhoto>();
+
+  [...completedProjectImages, ...ongoingProjectImages].forEach((item) => {
+    if (!bySource.has(item.src)) {
+      bySource.set(item.src, item);
+    }
+  });
+
+  return Array.from(bySource.values()).sort((first, second) => stablePhotoScore(first.src) - stablePhotoScore(second.src));
+}
+
+function AllPhotosGalleryGrid() {
+  const photos = getAllGalleryPhotos();
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const selected = selectedIndex == null ? null : photos[selectedIndex] ?? null;
+
+  const showNext = () => {
+    setSelectedIndex((value) => {
+      if (value == null) {
+        return value;
+      }
+
+      return (value + 1) % photos.length;
+    });
+  };
+
+  const showPrevious = () => {
+    setSelectedIndex((value) => {
+      if (value == null) {
+        return value;
+      }
+
+      return (value - 1 + photos.length) % photos.length;
+    });
+  };
+
+  return (
+    <>
+      <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
+        {photos.map((photo, index) => (
+          <button
+            key={photo.src}
+            type="button"
+            onClick={() => setSelectedIndex(index)}
+            className="group mb-5 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] text-left shadow-[0_20px_58px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40"
+          >
+            <div className={`relative overflow-hidden bg-[#080808] ${index % 4 === 0 ? 'aspect-[4/5]' : 'aspect-[4/3]'}`}>
+              <ImageWithFallback src={photo.src} alt={photo.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            </div>
+            <div className="p-5">
+              <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#D4AF37]">{photo.category}</p>
+              <h3 className="mt-2 line-clamp-1 font-heading text-lg font-bold text-white">{photo.title}</h3>
+              {photo.location && <p className="mt-1 line-clamp-1 text-sm font-semibold text-white/50">{photo.location}</p>}
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <Lightbox item={selected} onClose={() => setSelectedIndex(null)} onNext={showNext} onPrevious={showPrevious} />
+    </>
+  );
+}
+
 export function GalleryPage() {
   return (
     <>
       <PageHero
         eyebrow="Gallery"
-        title="Completed projects organized by project."
-        text="Open a project card to view its related photos on a dedicated, mobile-friendly gallery page."
+        title="Company work photo gallery."
+        text="Explore completed, ongoing, and service-reference photos from SM Power Solutions in one professional gallery."
         image="/hero_control_room.jpg"
       />
       <section className="bg-[#080808] py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <ProjectGalleryCards projects={completedProjectGalleries} />
+          <div className="mb-10 max-w-3xl">
+            <p className="font-mono text-xs uppercase tracking-[0.34em] text-[#D4AF37]">All Photos</p>
+            <h2 className="mt-3 font-heading text-3xl font-black text-white sm:text-4xl">Work photos in one place.</h2>
+            <p className="mt-4 text-sm leading-7 text-white/58">
+              A mixed collection of site work, completed projects, ongoing references, and service visuals.
+            </p>
+          </div>
+          <AllPhotosGalleryGrid />
         </div>
       </section>
     </>
