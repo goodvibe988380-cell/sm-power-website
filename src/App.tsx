@@ -32,6 +32,26 @@ const navLinks = [
   { label: 'Contact', href: '/contact' },
 ];
 
+const brandTagline = 'Power Rules the World. We Rule the Power.';
+
+function LogoMark({
+  alt = '',
+  className = '',
+  imageClassName = '',
+  src = '/smps-logo-mark.svg',
+}: {
+  alt?: string;
+  className?: string;
+  imageClassName?: string;
+  src?: string;
+}) {
+  return (
+    <span className={`brand-logo-frame ${className}`} aria-hidden={alt ? undefined : true}>
+      <img src={src} alt={alt} loading="lazy" className={`h-full w-full object-contain ${imageClassName}`} />
+    </span>
+  );
+}
+
 const servicePillars = [
   {
     icon: PlugZap,
@@ -259,9 +279,9 @@ function App() {
           <div className="energy-trace energy-trace-vertical" aria-hidden="true" />
           <div className="activation-flash" aria-hidden="true" />
           <div className="relative z-10 flex flex-col items-center px-6 text-center">
-            <img src="/smps-logo.png" alt="SM Power Solutions logo" className="intro-logo h-32 w-auto sm:h-40" />
+            <LogoMark alt="SM Power Solutions logo" className="intro-logo h-32 w-32 sm:h-40 sm:w-40" />
             <p className="intro-tagline mt-7 font-heading text-sm font-bold uppercase tracking-[0.28em] text-[#FFD700] sm:text-lg">
-              Power Rules the World. We Rule Power.
+              {brandTagline}
             </p>
           </div>
         </div>
@@ -269,7 +289,7 @@ function App() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#080808]/90 backdrop-blur-md">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:h-20 lg:px-8">
           <a href="/" className="flex items-center gap-3" aria-label="SM Power Solutions home">
-            <img src="/smps-logo.png" alt="" className="h-11 w-auto shadow-[0_0_24px_rgba(255,196,0,0.22)]" />
+            <LogoMark className="h-11 w-11 shadow-[0_0_24px_rgba(255,196,0,0.22)]" />
             <span className="font-heading text-base font-black tracking-[0.14em] text-[#FFC400] sm:text-lg">
               SM POWER SOLUTIONS
             </span>
@@ -335,12 +355,12 @@ function App() {
 
           <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-7xl flex-col items-center justify-center gap-10 px-5 py-14 text-center lg:px-8">
             <div className="mx-auto max-w-5xl">
-              <img src="/smps-logo.png" alt="SM Power Solutions logo" className="mx-auto h-28 w-auto drop-shadow-[0_0_34px_rgba(255,215,0,0.28)] sm:h-36" />
-              <h1 className="mt-8 font-heading text-4xl font-black uppercase leading-[0.95] tracking-[0.08em] text-white sm:text-6xl lg:text-7xl">
+              <LogoMark alt="SM Power Solutions logo" className="hero-logo-mark mx-auto" />
+              <h1 className="mt-6 font-heading text-4xl font-black uppercase leading-[0.95] tracking-[0.08em] text-white sm:mt-7 sm:text-6xl lg:text-7xl">
                 SM <span className="text-white">POWER</span> SOLUTIONS
               </h1>
               <p className="mx-auto mt-5 max-w-3xl font-heading text-xl font-semibold text-[#FFD700] sm:text-2xl">
-                Power Rules the World. We Rule Power.
+                {brandTagline}
               </p>
               <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-white/72 sm:text-lg">
                 Premium MEP services for HVAC, electrical, plumbing, networking, solar, backup power and maintenance, delivered with clean planning and dependable site execution.
@@ -560,10 +580,10 @@ function App() {
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur-sm">
               <div className="mb-6 flex items-center gap-4 border-b border-white/10 pb-6">
-                <img src="/smps-logo.png" alt="" className="h-14 w-auto" />
+                <LogoMark className="h-14 w-14" />
                 <div>
                   <p className="font-heading text-xl font-black uppercase text-[#FFC400]">SM Power Solutions</p>
-                  <p className="mt-1 text-sm uppercase tracking-[0.12em] text-[#FFC400]/80">Power Rules The World We Rule The Power</p>
+                  <p className="mt-1 text-sm uppercase tracking-[0.12em] text-[#FFC400]/80">{brandTagline}</p>
                 </div>
               </div>
               <div className="grid gap-4">
@@ -631,8 +651,8 @@ function App() {
       <footer className="border-t border-white/10 bg-[#080808] px-5 py-8">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 text-center text-sm text-white/52 sm:flex-row sm:text-left">
           <div className="flex items-center gap-3">
-            <img src="/smps-logo.png" alt="" className="h-10 w-auto" />
-            <span>SM Power Solutions. Power Rules The World We Rule The Power.</span>
+            <LogoMark className="h-10 w-10" />
+            <span>SM Power Solutions. {brandTagline}</span>
           </div>
           <a href="mailto:prithviraj.smps@gmail.com" className="transition-colors hover:text-[#D4AF37]">
             prithviraj.smps@gmail.com

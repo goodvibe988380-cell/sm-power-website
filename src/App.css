@@ -97,6 +97,16 @@ html {
   }
 }
 
+@keyframes heroLogoFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
 @keyframes taglineFade {
   0%,
   68% {
@@ -182,6 +192,76 @@ html {
 
 .intro-overlay {
   animation: introFadeIn 0.5s ease both, introFadeOut 0.55s ease 2.72s forwards;
+}
+
+.brand-logo-frame {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  background: transparent;
+  border-radius: 0;
+  line-height: 0;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.16));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.brand-logo-frame::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  z-index: -1;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.18) 0%, rgba(255, 196, 0, 0.08) 42%, transparent 72%);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.hero-logo-mark {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  overflow: visible;
+  background: transparent;
+  border-radius: 0;
+  animation: heroLogoFloat 5.8s ease-in-out infinite;
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.hero-logo-mark::before {
+  content: "";
+  position: absolute;
+  inset: -42px;
+  z-index: -1;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.22) 0%, rgba(255, 196, 0, 0.13) 38%, transparent 70%);
+  filter: blur(8px);
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.hero-logo-mark img {
+  filter: drop-shadow(0 0 14px rgba(255, 215, 0, 0.18));
+}
+
+.hero-logo-mark:hover {
+  filter: brightness(1.06);
+}
+
+@media (min-width: 640px) {
+  .hero-logo-mark {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-logo-mark {
+    width: 160px;
+    height: 160px;
+  }
 }
 
 .intro-logo {
