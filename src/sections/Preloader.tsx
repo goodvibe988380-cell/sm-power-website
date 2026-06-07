@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { Zap } from 'lucide-react';
+import LogoMark from '../components/LogoMark';
 
 const Preloader = forwardRef<HTMLDivElement>((_, ref) => {
   return (
@@ -10,13 +10,7 @@ const Preloader = forwardRef<HTMLDivElement>((_, ref) => {
       <div className="flex flex-col items-center gap-6">
         {/* Logo Animation */}
         <div className="relative">
-          <div className="w-20 h-20 rounded-full border-2 border-gold/30 flex items-center justify-center animate-pulse-gold">
-            <div className="w-16 h-16 rounded-full border-2 border-gold/50 flex items-center justify-center">
-              <Zap className="w-8 h-8 text-gold animate-pulse" />
-            </div>
-          </div>
-          {/* Rotating ring */}
-          <div className="absolute inset-0 w-20 h-20 rounded-full border-t-2 border-gold animate-spin" style={{ animationDuration: '1s' }} />
+          <LogoMark className="h-24 w-20 animate-pulse-gold" />
         </div>
         
         {/* Text */}

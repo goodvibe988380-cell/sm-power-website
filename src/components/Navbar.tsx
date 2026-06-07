@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Menu, X, Zap } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+import LogoMark from './LogoMark'
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -32,9 +33,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
         <button onClick={() => scrollTo('#home')} className="flex items-center gap-3 text-left">
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#D4AF37] shadow-[0_0_30px_rgba(212,175,55,0.15)]">
-            <Zap className="h-5 w-5" />
-          </span>
+          <LogoMark className="h-11 w-9" />
           <span>
             <span className="block text-[11px] uppercase tracking-[0.35em] text-[#D4AF37]/90">SM Power Solutions</span>
             <span className="block text-xs text-white/55">Electrical • ELV • ESCOM Works</span>

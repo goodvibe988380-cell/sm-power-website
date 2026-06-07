@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { Menu, X, Zap } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import LogoMark from '../components/LogoMark';
 
 const navLinks = [
   { label: 'About', href: '#about' },
@@ -53,9 +54,7 @@ export default function Navbar() {
                 gsap.to(window, { duration: 0.8, scrollTo: 0, ease: 'power3.inOut' });
               }}
             >
-              <div className="w-8 h-8 rounded-full border border-gold/50 flex items-center justify-center group-hover:border-gold transition-colors">
-                <Zap className="w-4 h-4 text-gold" />
-              </div>
+              <LogoMark className="h-10 w-8" />
               <span className="font-heading font-bold text-lg tracking-wider text-slate-900">
                 SM <span className="text-gold">POWER</span>
               </span>

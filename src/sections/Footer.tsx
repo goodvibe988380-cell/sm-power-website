@@ -1,7 +1,8 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Zap, Linkedin, Twitter, Youtube, ArrowUp } from 'lucide-react';
+import { Linkedin, Twitter, Youtube, ArrowUp } from 'lucide-react';
+import LogoMark from '../components/LogoMark';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,9 +79,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full border border-slate-300 bg-white flex items-center justify-center shadow-sm">
-                <Zap className="w-5 h-5 text-gold" />
-              </div>
+              <LogoMark className="h-12 w-10" />
               <span className="font-heading font-bold text-xl tracking-wider text-slate-900">
                 SM POWER SOLUTIONS
               </span>

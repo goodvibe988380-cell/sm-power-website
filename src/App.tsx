@@ -12,6 +12,8 @@ import {
   ShieldCheck,
   Sparkles,
   Sun,
+  Wind,
+  Wifi,
   Wrench,
   X,
 } from 'lucide-react';
@@ -20,6 +22,7 @@ import WhatsAppButton from './sections/WhatsAppButton';
 import ResidentialSection from './sections/ResidentialSection';
 import Gallery from './components/Gallery';
 import ClientReviewSection from './sections/ClientReviewSection';
+import LogoMark from './components/LogoMark';
 import { AboutPage, ContactPage, GalleryPage, ProjectGalleryPage, ProjectsPage, ServicesPage } from './pages/SitePages';
 import './App.css';
 
@@ -34,24 +37,6 @@ const navLinks = [
 
 const brandTagline = 'Power Rules the World. We Rule the Power.';
 
-function LogoMark({
-  alt = '',
-  className = '',
-  imageClassName = '',
-  src = '/smps-logo-mark.svg',
-}: {
-  alt?: string;
-  className?: string;
-  imageClassName?: string;
-  src?: string;
-}) {
-  return (
-    <span className={`brand-logo-frame ${className}`} aria-hidden={alt ? undefined : true}>
-      <img src={src} alt={alt} loading="lazy" className={`h-full w-full object-contain ${imageClassName}`} />
-    </span>
-  );
-}
-
 const servicePillars = [
   {
     icon: PlugZap,
@@ -59,14 +44,14 @@ const servicePillars = [
     description: 'Premium wiring, panels, earthing, lighting, automation and power distribution for safe modern spaces.',
   },
   {
-    icon: Sun,
-    title: 'Solar Installation',
-    description: 'Efficient solar planning and installation support for homes, apartments and commercial properties.',
+    icon: Wifi,
+    title: 'Networking',
+    description: 'Professional networking solutions including LAN setup, structured cabling, Wi-Fi deployment, server rack installation, network troubleshooting, CCTV integration, and scalable connectivity for residential, commercial, and industrial projects.',
   },
   {
-    icon: BatteryCharging,
-    title: 'Power Backup',
-    description: 'Reliable backup power solutions, EV readiness and system planning for uninterrupted operations.',
+    icon: Wind,
+    title: 'HVAC',
+    description: 'Complete HVAC solutions including air conditioning installation, ventilation systems, ducting, HVAC planning, maintenance, troubleshooting, and energy-efficient climate control for commercial and industrial facilities.',
   },
   {
     icon: Wrench,
@@ -279,7 +264,7 @@ function App() {
           <div className="energy-trace energy-trace-vertical" aria-hidden="true" />
           <div className="activation-flash" aria-hidden="true" />
           <div className="relative z-10 flex flex-col items-center px-6 text-center">
-            <LogoMark alt="SM Power Solutions logo" className="intro-logo h-32 w-32 sm:h-40 sm:w-40" />
+            <LogoMark alt="SM Power Solutions logo" className="intro-logo h-32 w-[108px] sm:h-40 sm:w-[135px]" />
             <p className="intro-tagline mt-7 font-heading text-sm font-bold uppercase tracking-[0.28em] text-[#FFD700] sm:text-lg">
               {brandTagline}
             </p>
@@ -288,8 +273,8 @@ function App() {
       )}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#080808]/90 backdrop-blur-md">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:h-20 lg:px-8">
-          <a href="/" className="flex items-center gap-3" aria-label="SM Power Solutions home">
-            <LogoMark className="h-11 w-11 shadow-[0_0_24px_rgba(255,196,0,0.22)]" />
+          <a href="/" className="flex items-center gap-4" aria-label="SM Power Solutions home">
+            <LogoMark className="h-12 w-10 sm:h-14 sm:w-12" />
             <span className="font-heading text-base font-black tracking-[0.14em] text-[#FFC400] sm:text-lg">
               SM POWER SOLUTIONS
             </span>
@@ -580,7 +565,7 @@ function App() {
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur-sm">
               <div className="mb-6 flex items-center gap-4 border-b border-white/10 pb-6">
-                <LogoMark className="h-14 w-14" />
+                <LogoMark className="h-14 w-12" />
                 <div>
                   <p className="font-heading text-xl font-black uppercase text-[#FFC400]">SM Power Solutions</p>
                   <p className="mt-1 text-sm uppercase tracking-[0.12em] text-[#FFC400]/80">{brandTagline}</p>
@@ -651,7 +636,7 @@ function App() {
       <footer className="border-t border-white/10 bg-[#080808] px-5 py-8">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 text-center text-sm text-white/52 sm:flex-row sm:text-left">
           <div className="flex items-center gap-3">
-            <LogoMark className="h-10 w-10" />
+            <LogoMark className="h-10 w-8" />
             <span>SM Power Solutions. {brandTagline}</span>
           </div>
           <a href="mailto:prithviraj.smps@gmail.com" className="transition-colors hover:text-[#D4AF37]">
