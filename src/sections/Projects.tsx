@@ -38,6 +38,15 @@ const projects = [
     type: 'commercial',
   },
   {
+    title: 'Heaven Inn Bar Lounge',
+    category: 'Completed',
+    status: 'Delivered',
+    progress: 100,
+    location: 'Hospitality Venue',
+    image: '/projects/completed/heaven-inn-backlit-signage.jpg',
+    type: 'commercial',
+  },
+  {
     title: 'Design Consultation',
     category: 'Ongoing',
     status: 'Planning phase',
@@ -90,6 +99,15 @@ const projects = [
     progress: 100,
     location: 'Jayanagar, Bangalore',
     image: '/bungalow_electrical.svg',
+    type: 'residential',
+  },
+  {
+    title: 'Shri Sai Dollars Apartment',
+    category: 'Completed',
+    status: 'Delivered',
+    progress: 100,
+    location: 'Residential Complex',
+    image: '/projects/completed/apartment-facade-night-lighting.jpg',
     type: 'residential',
   },
   {

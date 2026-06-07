@@ -61,6 +61,15 @@ const projectDefinitions: ProjectDefinition[] = [
     coverKeyword: 'apartment-facade-night',
     keywords: ['apartment', 'landscape', 'garden', 'palm', 'resort-entry', 'temple'],
   },
+  {
+    slug: 'heaven-inn-bar-lounge',
+    title: 'Heaven Inn Bar Lounge',
+    category: 'Hospitality Project',
+    location: 'Hospitality Venue',
+    summary: 'Premium bar and lounge lighting design featuring backlit signage, ambient stair lighting, neon feature walls and shelf accent lighting for an upscale hospitality experience.',
+    coverKeyword: 'heaven-inn-backlit',
+    keywords: ['heaven-inn', 'bar', 'backlit', 'shelf', 'neon', 'lounge', 'ambient', 'feature'],
+  },
 ];
 
 function normalize(value: string) {
