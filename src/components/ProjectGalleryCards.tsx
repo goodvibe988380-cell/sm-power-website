@@ -3,23 +3,27 @@ import { X } from 'lucide-react';
 import type { CompletedProjectGallery } from '../data/projectGalleries';
 
 function CoverImage({ src, alt, eager }: { src: string; alt: string; eager: boolean }) {
-  const [imageSrc, setImageSrc] = useState(src);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setHasError(false);
+  }, [src]);
 
   return (
     <img
-      src={imageSrc}
+      src={hasError ? '/project_1.jpg' : src}
       alt={alt}
       loading={eager ? 'eager' : 'lazy'}
       decoding="async"
       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-      onError={() => setImageSrc('/project_1.jpg')}
+      onError={() => setHasError(true)}
     />
   );
 }
 
 export default function ProjectGalleryCards({ projects }: { projects: CompletedProjectGallery[] }) {
   const [selectedProject, setSelectedProject] = useState<CompletedProjectGallery | null>(null);
-  const [lightboxImageSrc, setLightboxImageSrc] = useState<string | null>(null);
+  const [lightboxImageError, setLightboxImageError] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -29,7 +33,7 @@ export default function ProjectGalleryCards({ projects }: { projects: CompletedP
     if (selectedProject) {
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
-      setLightboxImageSrc(selectedProject.coverImage);
+      setLightboxImageError(false);
     }
 
     return () => {
@@ -86,10 +90,10 @@ export default function ProjectGalleryCards({ projects }: { projects: CompletedP
           >
             <div className="relative max-h-[76vh] bg-black">
               <img
-                src={lightboxImageSrc || selectedProject.coverImage}
+              src={lightboxImageError ? '/project_1.jpg' : selectedProject.coverImage}
                 alt={selectedProject.title}
                 className="mx-auto max-h-[76vh] w-full object-contain"
-                onError={() => setLightboxImageSrc('/project_1.jpg')}
+              onError={() => setLightboxImageError(true)}
               />
             </div>
             <div className="flex flex-col gap-3 border-t border-white/10 p-5 sm:flex-row sm:items-center sm:justify-between">

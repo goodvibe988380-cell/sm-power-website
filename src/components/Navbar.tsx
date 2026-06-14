@@ -62,7 +62,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-[#070708]/95 px-5 py-4 backdrop-blur-xl md:hidden">
+        <nav className="border-t border-white/10 bg-[#070708]/95 px-5 py-4 backdrop-blur-xl md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-3">
             {navLinks.map((link) => (
               <button
@@ -74,7 +74,7 @@ export default function Navbar() {
               </button>
             ))}
           </div>
-        </div>
+        </nav>
       )}
     </header>
   )

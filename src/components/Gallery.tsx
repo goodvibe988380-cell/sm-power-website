@@ -156,16 +156,20 @@ function ImageWithFallback({
   className: string;
   eager?: boolean;
 }) {
-  const [imageSrc, setImageSrc] = useState(src);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setHasError(false);
+  }, [src]);
 
   return (
     <img
-      src={imageSrc}
+      src={hasError ? fallbackImage : src}
       alt={alt}
       loading={eager ? 'eager' : 'lazy'}
       decoding="async"
       className={className}
-      onError={() => setImageSrc(fallbackImage)}
+      onError={() => setHasError(true)}
     />
   );
 }
