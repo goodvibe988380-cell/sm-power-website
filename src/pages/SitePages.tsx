@@ -637,3 +637,36 @@ export function ContactPage() {
     </>
   );
 }
+
+export function NotFoundPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Page not found"
+        title="This page is not available."
+        text="Use the menu below to continue browsing SM Power Solutions services, projects, gallery and contact options."
+        image="/hero_control_room.jpg"
+      />
+      <section className="bg-[#080808] py-16">
+        <div className="mx-auto flex max-w-7xl flex-wrap gap-3 px-5 lg:px-8">
+          {[
+            ['Home', '/'],
+            ['About', '/about'],
+            ['Services', '/services'],
+            ['Projects', '/projects'],
+            ['Gallery', '/gallery'],
+            ['Contact', '/contact'],
+          ].map(([label, href]) => (
+            <a
+              key={href}
+              href={href}
+              className="inline-flex items-center justify-center rounded-full border border-[#D4AF37]/35 bg-[#D4AF37]/10 px-5 py-3 text-sm font-bold text-[#FFD700] transition-colors hover:bg-[#FFD700] hover:text-black"
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}

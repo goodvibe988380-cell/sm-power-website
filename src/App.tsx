@@ -23,7 +23,7 @@ import ResidentialSection from './sections/ResidentialSection';
 import Gallery from './components/Gallery';
 import ClientReviewSection from './sections/ClientReviewSection';
 import LogoMark from './components/LogoMark';
-import { AboutPage, ContactPage, GalleryPage, ProjectGalleryPage, ProjectsPage, ServicesPage } from './pages/SitePages';
+import { AboutPage, ContactPage, GalleryPage, NotFoundPage, ProjectGalleryPage, ProjectsPage, ServicesPage } from './pages/SitePages';
 import './App.css';
 
 const navLinks = [
@@ -226,16 +226,16 @@ function App() {
       <AboutPage />
     ) : currentPath === '/services' ? (
       <ServicesPage />
-    ) : projectGalleryMatch ? (
-      <ProjectGalleryPage slug={projectGalleryMatch[1]} />
     ) : currentPath === '/projects' ? (
       <ProjectsPage />
+    ) : projectGalleryMatch ? (
+      <ProjectGalleryPage slug={projectGalleryMatch[1]} />
     ) : currentPath === '/gallery' ? (
       <GalleryPage />
     ) : currentPath === '/contact' ? (
       <ContactPage />
     ) : (
-      <AboutPage />
+      <NotFoundPage />
     );
 
   useEffect(() => {
@@ -286,7 +286,7 @@ function App() {
                 key={link.href}
                 href={link.href}
                 className={`font-mono text-xs uppercase tracking-[0.22em] transition-colors hover:text-[#D4AF37] ${
-                  currentPath === link.href ? 'text-[#D4AF37]' : 'text-white/60'
+                  currentPath === link.href || (link.href === '/projects' && currentPath.startsWith('/projects/')) ? 'text-[#D4AF37]' : 'text-white/60'
                 }`}
               >
                 {link.label}
@@ -319,7 +319,7 @@ function App() {
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`rounded-xl px-4 py-3 font-mono text-xs uppercase tracking-[0.22em] transition-colors ${
-                  currentPath === link.href ? 'bg-[#D4AF37] text-[#080808]' : 'text-white/68 hover:bg-white/5 hover:text-[#D4AF37]'
+                  currentPath === link.href || (link.href === '/projects' && currentPath.startsWith('/projects/')) ? 'bg-[#D4AF37] text-[#080808]' : 'text-white/68 hover:bg-white/5 hover:text-[#D4AF37]'
                 }`}
               >
                 {link.label}
