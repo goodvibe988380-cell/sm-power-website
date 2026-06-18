@@ -39,6 +39,11 @@ export const completedProjectImages: GeneratedImage[] = [
     "src": "/projects/completed/apartment-facade-night-lighting.jpg"
   },
   {
+    "title": "Architect Office Balraj Uras",
+    "category": "Completed",
+    "src": "/projects/completed/architect-office-balraj-uras.jpg"
+  },
+  {
     "title": "Atrium Finished Electrical",
     "category": "Wiring",
     "src": "/projects/completed/atrium-finished-electrical.jpg"
@@ -137,8 +142,6 @@ export const completedProjectImages: GeneratedImage[] = [
   {
     "title": "Farmhouse Changiri Night",
     "category": "Completed",
-    "location": "Changiri",
-    "description": "Rural farmhouse project featuring ambient and architectural lighting for a warm, natural finish.",
     "src": "/projects/completed/farmhouse-changiri-night.png"
   },
   {
@@ -217,8 +220,6 @@ export const completedProjectImages: GeneratedImage[] = [
   {
     "title": "Jayanagara Shimoga Building",
     "category": "Completed",
-    "location": "Jayanagara, Shimoga",
-    "description": "Residential building and apartment facade electrical completion in Jayanagara, Shimoga.",
     "src": "/projects/completed/jayanagara-shimoga-building.png"
   },
   {
@@ -254,13 +255,6 @@ export const completedProjectImages: GeneratedImage[] = [
     "title": "Nandini Milk Booth",
     "category": "Completed",
     "src": "/projects/completed/nandini-milk-booth.png"
-  },
-  {
-    "title": "Architect Office Entrance Lighting",
-    "category": "Completed",
-    "location": "Balraj Uras Road, Shimoga",
-    "description": "Modern architect office entrance with premium ceiling lighting and decorative accent features for professional workspace.",
-    "src": "/projects/completed/architect-office-balraj-uras.png"
   },
   {
     "title": "Neon Feature Wall Lighting",
