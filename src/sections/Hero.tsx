@@ -1,4 +1,7 @@
 import { ArrowRight, Clock3, ShieldCheck, Sparkles } from 'lucide-react'
+import { Suspense, lazy } from 'react';
+
+const HeroThreeCanvas = lazy(() => import('../components/HeroThreeCanvas'));
 
 const stats = [
   { label: 'Established', value: '2019' },
@@ -51,7 +54,12 @@ export default function Hero() {
 
         <div className="relative">
           <div className="absolute inset-0 rounded-[2rem] border border-[#D4AF37]/15 bg-white/5 shadow-[0_0_60px_rgba(212,175,55,0.08)] backdrop-blur-sm" />
-          <div className="relative grid gap-4 p-5 sm:grid-cols-2">
+          <div className="absolute inset-0 z-0 pointer-events-none rounded-[2rem] overflow-hidden">
+            <Suspense fallback={null}>
+              <HeroThreeCanvas />
+            </Suspense>
+          </div>
+          <div className="relative z-10 grid gap-4 p-5 sm:grid-cols-2">
             <div className="rounded-[1.6rem] border border-white/10 bg-black/50 p-5">
               <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/15 text-[#D4AF37]"><Clock3 className="h-5 w-5" /></div>
               <h2 className="text-lg font-semibold text-white">24/7 Emergency Service</h2>
